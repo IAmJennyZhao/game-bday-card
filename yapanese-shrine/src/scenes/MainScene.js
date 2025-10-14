@@ -18,7 +18,14 @@ export default class MainScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(480, 400, 'player');
         this.player.setCollideWorldBounds(true);
 
+        // Add arrow and wasd movement listeners
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.wasdKeys = this.input.keyboard.addKeys({
+            up: Phaser.Input.Keyboard.KeyCodes.W,
+            left: Phaser.Input.Keyboard.KeyCodes.A,
+            down: Phaser.Input.Keyboard.KeyCodes.S,
+            right: Phaser.Input.Keyboard.KeyCodes.D
+        })
 
         // Interaction text
         this.interactText = this.add.text(20, 500, '', { font: '16px monospace', fill: '#fff' });
@@ -40,13 +47,18 @@ export default class MainScene extends Phaser.Scene {
     }
 
     update() {
-        // Movement
+        // Movement using arrow or wasd keys 
         const speed = 150;
-        this.player.setVelocity(0);
-        if (this.cursors.left.isDown) this.player.setVelocityX(-speed);
-        if (this.cursors.right.isDown) this.player.setVelocityX(speed);
-        if (this.cursors.up.isDown) this.player.setVelocityY(-speed);
-        if (this.cursors.down.isDown) this.player.setVelocityY(speed);
+        let xVel = 0;
+        let yVel = 0;
+
+        if (this.cursors.left.isDown || this.wasdKeys.left.isDown) xVel += -speed;
+        if (this.cursors.right.isDown || this.wasdKeys.right.isDown) xVel += speed;
+        if (this.cursors.up.isDown || this.wasdKeys.up.isDown) yVel += -speed;
+        if (this.cursors.down.isDown || this.wasdKeys.down.isDown) yVel += speed;
+
+        this.player.setVelocityX(xVel);
+        this.player.setVelocityY(yVel);
 
         // Check proximity to any zone
         let nearZone = null;
