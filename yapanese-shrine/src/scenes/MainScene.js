@@ -32,13 +32,13 @@ export default class MainScene extends Phaser.Scene {
 
         // Define interact zones (x, y, id)
         this.zones = [
-            { x: 480, y: 420, id: 'rintsuki' },
-            { x: 360, y: 420, id: 'grassFriend' },
-            { x: 480, y: 320, id: 'picnic' },
-            { x: 720, y: 200, id: 'bridgeFriend' },
-            { x: 480, y: 120, id: 'shrine' },
-            { x: 200, y: 300, id: 'archery' },
-            { x: 100, y: 200, id: 'portal' }
+            { x: 510, y: 390, id: 'rintsuki' },
+            { x: 365, y: 430, id: 'grassFriend' },
+            { x: 620, y: 320, id: 'picnic' },
+            { x: 665, y: 160, id: 'bridgeFriend' },
+            { x: 485, y: 210, id: 'shrine' },
+            { x: 345, y: 252, id: 'archery' },
+            { x: 280, y: 340, id: 'portal' }
         ];
 
         this.zoneSprites = this.zones.map(z => this.add.zone(z.x, z.y, 40, 40).setOrigin(0.5));
