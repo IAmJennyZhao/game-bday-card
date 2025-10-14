@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import MainScene from './scenes/MainScene.js';
+import GachaScene from './scenes/GachaScene.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -10,7 +11,7 @@ const config = {
         default: 'arcade',
         arcade: { debug: false }
     },
-    scene: [MainScene]
+    scene: [MainScene, GachaScene]
 };
 
 new Phaser.Game(config);
