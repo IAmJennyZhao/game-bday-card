@@ -8,14 +8,16 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         this.load.image('bg', 'src/assets/background.png');
-        this.load.spritesheet('player', 'src/assets/player.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player', 'src/assets/player.png', { frameWidth: 78, frameHeight: 210 });
     }
+
 
     create() {
         this.add.image(480, 270, 'bg').setOrigin(0.5);
 
         // Player setup
         this.player = this.physics.add.sprite(480, 400, 'player');
+        this.player.setScale(0.2, 0.2);
         this.player.setCollideWorldBounds(true);
 
         // Add arrow and wasd movement listeners
@@ -44,21 +46,32 @@ export default class MainScene extends Phaser.Scene {
         this.zoneSprites = this.zones.map(z => this.add.zone(z.x, z.y, 40, 40).setOrigin(0.5));
 
         this.eKey = this.input.keyboard.addKey('E');
+
+        // Interaction states
+        this.InteractionStates = {
+            None: 'None', 
+            InDialogue: 'InDialogue', 
+            InCutscene: 'InCutscene'
+        };
+        this.interactionState = this.InteractionStates.None;
     }
 
     update() {
-        // Movement using arrow or wasd keys 
-        const speed = 150;
-        let xVel = 0;
-        let yVel = 0;
+        // Movement using arrow or wasd keys when interaction state is None
+        this.player.setVelocity(0);
+        if (this.interactionState === this.InteractionStates.None) {
+            const speed = 150;
+            let xVel = 0;
+            let yVel = 0;
 
-        if (this.cursors.left.isDown || this.wasdKeys.left.isDown) xVel += -speed;
-        if (this.cursors.right.isDown || this.wasdKeys.right.isDown) xVel += speed;
-        if (this.cursors.up.isDown || this.wasdKeys.up.isDown) yVel += -speed;
-        if (this.cursors.down.isDown || this.wasdKeys.down.isDown) yVel += speed;
+            if (this.cursors.left.isDown || this.wasdKeys.left.isDown) xVel += -speed;
+            if (this.cursors.right.isDown || this.wasdKeys.right.isDown) xVel += speed;
+            if (this.cursors.up.isDown || this.wasdKeys.up.isDown) yVel += -speed;
+            if (this.cursors.down.isDown || this.wasdKeys.down.isDown) yVel += speed;
 
-        this.player.setVelocityX(xVel);
-        this.player.setVelocityY(yVel);
+            this.player.setVelocityX(xVel);
+            this.player.setVelocityY(yVel);
+        }
 
         // Check proximity to any zone
         let nearZone = null;
@@ -67,15 +80,18 @@ export default class MainScene extends Phaser.Scene {
             const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, z.x, z.y);
             if (dist < 40) nearZone = z;
         }
-
-        if (nearZone) {
+        // console.log(this.interactionState);
+        console.log(nearZone!=null, this.interactionState === this.InteractionStates.None);
+        if (nearZone!=null && (this.interactionState === this.InteractionStates.None)) {
             this.interactText.setText(`[E] Interact with ${nearZone.id}`);
             if (Phaser.Input.Keyboard.JustDown(this.eKey)) this.handleInteraction(nearZone.id);
+        } else if (this.interactionState === this.InteractionStates.InDialogue) {
+            this.interactText.setText(`[Space] Continue Dialogue`);
         } else {
             this.interactText.setText('');
         }
     }
-
+w
     handleInteraction(id) {
         if (id === 'portal' && allComplete()) {
             this.scene.start('EndingScene');
@@ -92,27 +108,34 @@ export default class MainScene extends Phaser.Scene {
         const video = document.getElementById('birthdayVideo');
         video.style.display = 'block';
         video.currentTime = 0;
+        this.interactionState = this.InteractionStates.InCutscene;
         video.play();
 
         // hide video & return to game when done
         video.onended = () => {
             video.style.display = 'none';
             quests.talkedToPicnic = true;
+            this.interactionState = this.InteractionStates.None;
         };
     }
 
 
     playDialogue(id) {
+        // find lines and play dialogue
         const lines = dialogues[id];
         if (!lines) return;
         let i = 0;
+        this.interactionState = this.InteractionStates.InDialogue;
         const textObj = this.add.text(50, 450, lines[i], { font: '18px monospace', fill: '#fff', backgroundColor: '#0008' });
         const advance = () => {
             i++;
             if (i >= lines.length) {
+                // finish dialogue and mark quest complete
                 textObj.destroy();
                 this.markQuest(id);
                 this.input.keyboard.off('keydown-SPACE', advance);
+                
+                this.interactionState = this.InteractionStates.None;
             } else textObj.setText(lines[i]);
         };
         this.input.keyboard.on('keydown-SPACE', advance);
