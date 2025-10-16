@@ -91,8 +91,6 @@ export default class MainScene extends Phaser.Scene {
     }
 
     update() {
-        console.log(this.player.x, this.player.y);
-
         // Movement using arrow or wasd keys when interaction state is None
         this.player.setVelocity(0);
         if (this.interactionState === this.InteractionStates.None) {
