@@ -28,8 +28,8 @@ export default class MainScene extends Phaser.Scene {
         backgroundImage.setScale(scale);
 
         // Center the image if necessary (to account for potential overflow on one axis)
-        backgroundImage.x = 0 - ((backgroundImage.displayWidth - cameraWidth) / 2);
-        backgroundImage.y = 0 - ((backgroundImage.displayHeight - cameraHeight) / 2);
+        backgroundImage.x = ((cameraWidth - backgroundImage.displayWidth) / 2);
+        backgroundImage.y = ((cameraHeight - backgroundImage.displayHeight) / 2);
 
         // // Optional: Make the background fixed relative to the camera
         // backgroundImage.setScrollFactor(0);
