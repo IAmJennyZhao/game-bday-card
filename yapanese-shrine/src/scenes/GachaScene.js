@@ -31,6 +31,7 @@ export default class GachaScene extends Phaser.Scene {
 
 
     create() {
+        // TODO: update UI when in viewing stage - maybe don't delete? 
         // Gacha UI
         this.add.text(300, 200, '🎰 Shrine Gacha', { font: '32px monospace', fill: '#fff' });
         this.gachaRules = this.add.text(320, 260, 'Goal Get a 5 star! (4 star chance: 90%, 5 star chase: 10%)', { font: '24px monospace', fill: '#fff' });
@@ -38,6 +39,7 @@ export default class GachaScene extends Phaser.Scene {
         this.pullCount = 0;
         this.spinBtn = this.add.text(340, 380, '[SPACE] Spin', { font: '20px monospace', fill: '#ff0' });
         this.spinBtn = this.add.text(340, 440, '[Q] Leave Gacha Shrine', { font: '20px monospace', fill: '#ff0' });
+        this.skipBtn = this.add.text(600, 900, '', { font: '20px monospace', fill: '#ff0' });
         if (quests.gachaComplete) this.resultText.setText("You already got a 5 star, you don't need to pull more!");
 
         // Input listeners
@@ -61,29 +63,55 @@ export default class GachaScene extends Phaser.Scene {
         // Pull states
         this.PullStates = {
             None: 'None', 
-            MidPull: 'MidPull'
+            MidPull: 'MidPull', 
+            ViewingPrize: 'ViewingPrize'
         };
         this.pullState = this.PullStates.None;
+
+        // visible gacha video and prize image
+        this.playingVideo = null;
+        this.viewingPrize = null;
+        this.viewingPrizeCall = null;
     }
 
     spin() {
-        // randomly determine 4 or 5 star (90% 4-star, 10% 5-star)
-        // hard pity at 6th pull
-        this.pullCount++;
-        let result;
-        const r = Math.random();
-        if (r < 0.9) result = 4;
-        else result = 5;
-        if (this.pullCount === 6) result = 5;
+        // If mid pull, skip to Prize Viewing
+        if (this.pullState === this.PullStates.MidPull) {
+            this.pullState = this.PullStates.ViewingPrize;
+            this.playingVideo.stop();
+            if (this.viewingPrizeCall) {
+                this.viewingPrizeCall.delay = 1; // skip to prize viewing
+            }
+        } 
+        // If viewing prize, close prize and return to None
+        else if (this.pullState === this.PullStates.ViewingPrize) {
+            this.playingVideo.destroy();
+            this.viewingPrize.destroy();
+            this.pullState = this.PullStates.None;
+            this.skipBtn.setText('')
+        } else {
+            // randomly determine 4 or 5 star (90% 4-star, 10% 5-star)
+            // hard pity at 6th pull
+            this.pullCount++;
+            let result;
+            const r = Math.random();
+            if (r < 0.9) result = 4;
+            else result = 5;
+            if (this.pullCount === 6) result = 5;
 
-        this.playRandomGachaVideo(result);
+            this.playRandomGachaVideo(result);
 
-        let resultStr = `Your last pull was a ${result}★!`;
-        if (quests.gachaComplete) resultStr += " You already got a 5 star, you don't need to pull more!";
-        this.resultText.setText(resultStr);
-        if (result === 5) {
-            quests.gachaComplete = true;
-            this.time.delayedCall(10000, () => this.scene.start('MainScene'));
+            // Update result text and quest status
+            let resultStr = `Your last pull was a ${result}★!`;
+            if (quests.gachaComplete) resultStr += " You already got a 5 star, you don't need to pull more!";
+            this.resultText.setText(resultStr);
+            if (result === 5) {
+                quests.gachaComplete = true;
+            }
+
+            // Update skip button text
+            this.skipBtn.setText('[SPACE] Press Space to skip')
+            this.skipBtn.setToTop();
         }
     }
 
@@ -96,8 +124,9 @@ export default class GachaScene extends Phaser.Scene {
         const video = this.add.video(0, 0, vidId);
         video.setOrigin(0, 0);
         video.play();
-        this.time.delayedCall(7000, () => this.getPrize(star));
+        this.getPrize(star);
         video.setPlaybackRate(this.gachaVideoIds[i]['playbackRate']);
+        this.playingVideo = video;
         
         // Resize background image to fit
         const cameraWidth = this.cameras.main.width;
@@ -116,8 +145,8 @@ export default class GachaScene extends Phaser.Scene {
 
         // hide video & return to game when done
         video.once('complete', (videoGameObject) => {
-            videoGameObject.destroy();
-            this.pullState = this.PullStates.None;
+            // videoGameObject.destroy();
+            this.pullState = this.PullStates.ViewingPrize;
         })
     }
 
@@ -127,27 +156,27 @@ export default class GachaScene extends Phaser.Scene {
         const endIdx = (star === 4) ? 9 : 13;
         const i = Math.floor(Math.random() * (endIdx - startIdx + 1)) + startIdx;
 
-        // Center the image on the screen
-        let prizeImg = this.add.image(
-            this.cameras.main.width / 2, 
-            this.cameras.main.height / 2, 
-            this.prizeImgs[i]
-        );
+        this.viewingPrizeCall = this.time.delayedCall(7000, () => {
+            // Center the image on the screen
+            let prizeImg = this.add.image(
+                this.cameras.main.width / 2, 
+                this.cameras.main.height / 2, 
+                this.prizeImgs[i]
+            );
+            this.viewingPrize = prizeImg;
 
-        // Resize background image to fit
-        const cameraWidth = this.cameras.main.width;
-        const cameraHeight = this.cameras.main.height;
+            // Resize background image to fit
+            const cameraWidth = this.cameras.main.width;
+            const cameraHeight = this.cameras.main.height;
 
-        // Calculate scaling factors to cover the screen
-        const scaleX = cameraWidth / prizeImg.width / 2;
-        const scaleY = cameraHeight / prizeImg.height / 2;
-        const scale = Math.min(scaleX, scaleY); // Use Math.max to ensure it covers the screen
-        prizeImg.setScale(scale);
-
-        this.time.delayedCall(3000, () => prizeImg.destroy());
+            // Calculate scaling factors to cover the screen
+            const scaleX = cameraWidth / prizeImg.width / 2;
+            const scaleY = cameraHeight / prizeImg.height / 2;
+            const scale = Math.min(scaleX, scaleY); // Use Math.max to ensure it covers the screen
+            prizeImg.setScale(scale);
+        }); // wait 7 seconds before showing prize
     }
 
-    // todo: button to skip gacha video and directly show prize or to stop showing prize
     // todo: 4 or 5 star animation
     // todo: sound effects
     
