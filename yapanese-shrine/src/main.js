@@ -6,12 +6,18 @@ import EndingScene from './scenes/EndingScene.js';
 
 const config = {
     type: Phaser.AUTO,
-    width: 960,
-    height: 540,
+    width: 1920,
+    height: 1080,
     pixelArt: true,
     physics: {
         default: 'arcade',
         arcade: { debug: false }
+    },
+    scale: {
+        mode: Phaser.Scale.FIT, // or Phaser.Scale.ENVELOP
+        parent: 'game-container', // The ID of your HTML div
+        width: 1920, // Your game's original width
+        height: 1080 // Your game's original height
     },
     scene: [MainScene, GachaScene, ArcheryScene, EndingScene]
 };
