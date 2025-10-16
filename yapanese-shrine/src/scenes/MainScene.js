@@ -176,6 +176,7 @@ w
     }
 
     markQuest(id) {
+        // TODO: update quest progression
         if (id === 'rintsuki') quests.talkedToRintsuki = true;
         if (id === 'grassFriend') quests.talkedToGrassFriend = true;
         if (id === 'picnic') quests.talkedToPicnic = true;

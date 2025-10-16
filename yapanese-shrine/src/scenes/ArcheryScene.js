@@ -46,5 +46,6 @@ export default class ArcheryScene extends Phaser.Scene {
         }
         this.time.delayedCall(2000, () => this.scene.start('MainScene'));
     }
+    // choose which npcs to be targets in shooting range
 }
 /*  */
