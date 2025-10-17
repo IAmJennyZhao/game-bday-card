@@ -1,12 +1,13 @@
 import { quests } from '../managers/QuestManager.js';
+import { valorantBG, gun, explosion } from '../assets';
 
 export default class ArcheryScene extends Phaser.Scene {
     constructor() { super('ArcheryScene'); }
 
     preload() {
-        this.load.image('valorantBG', './src/assets/images/valorant_range_bg.png');
-        this.load.image('gun', './src/assets/images/prime_vandal.png');       // cropped gun png
-        this.load.image('explosion', './src/assets/images/explosion_fx.png'); // small “bang” PNG
+        this.load.image('valorantBG', valorantBG);
+        this.load.image('gun', gun);                // cropped gun png
+        this.load.image('explosion', explosion);    // small “bang” PNG
     }
 
     create() {

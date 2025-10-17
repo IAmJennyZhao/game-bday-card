@@ -1,5 +1,6 @@
 import { quests, allComplete } from '../managers/QuestManager.js';
 import { dialogues } from '../managers/DialogueManager.js';
+import { bg, player } from '../assets';
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -8,8 +9,8 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         // load background image and sprite
-        this.load.image('bg', './src/assets/images/background.png');
-        this.load.spritesheet('player', './src/assets/player.png', { frameWidth: 78, frameHeight: 210 });
+        this.load.image('bg', bg);
+        this.load.spritesheet('player', player, { frameWidth: 78, frameHeight: 210 });
     }
 
 
