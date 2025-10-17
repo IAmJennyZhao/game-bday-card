@@ -91,13 +91,13 @@ export default class MainScene extends Phaser.Scene {
         };
         this.interactionState = this.InteractionStates.None;
 
-        // Dialogue Managers
-        this.dialogue = new DialogueManager(this, {
-            avatarKey: 'rintsukiAvatar',
-            dialogueBoxKey: 'dialogueBox',
-            fontFamily: 'PixelFont',
-            bilingual: true
-        });
+        // // Dialogue Managers
+        // rintsukiVoiceDialogue = new DialogueManager(this, {
+        //     avatarKey: 'rintsukiAvatar',
+        //     dialogueBoxKey: 'dialogueBox',
+        //     fontFamily: 'PixelFont',
+        //     bilingual: true
+        // });
     }
 
     update() {
@@ -162,25 +162,74 @@ export default class MainScene extends Phaser.Scene {
     }
 
 
-    playDialogue(id) {        
-        this.dialogue.startDialogue([
+    playDialogue(id) {
+        // rintsukiVoiceDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles);
+        let rintsukiVoiceDialogue = new DialogueManager(this, {
+            avatarName: "Rintsuki",
+            avatarKey: 'rintsukiAvatar',
+            dialogueBoxKey: 'dialogueBox',
+            fontFamily: 'PixelFont',
+            bilingual: true
+        });
+
+        const rintsukiSubtitles = [
+            { time: 0.0, english: "Happy Birthday, Void!", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 2.7, english: "Happy Birthday (in japanese :D)", japanese: "お誕生日おめでとう。" },
+            { time: 4.2, english: "Let's continue to get along! <3", japanese: "これからも、仲良くしようね。" },
+            { time: 7.4, english: "Whether it's gaming or chatting or anything really, let's hangout with everyone again.", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
+            { time: 11.2, english: "Take care, and congrats again on turning 19 years old!", japanese: "いいじゃんしてね！ 19才改めておめでとう！！" },
+        ];
+
+        let rintsukiVoiceMessageDialogue = new DialogueManager(this, {
+            avatarName: "Rintsuki",
+            avatarKey: 'rintsukiAvatar',
+            dialogueBoxKey: 'dialogueBox',
+            fontFamily: 'PixelFont',
+            bilingual: true
+        });
+
+        rintsukiVoiceDialogue.startDialogue([
             {
                 english: "Hey, Void! Long time no see.",
                 japanese: "やあ、ヴォイド！久しぶりだね。",
-                // voiceKey: 'rintsukiVoice', // only include if you want audio to play immediately
+                // voiceKey: 'rintsuki',
                 choices: [
-                    { text: "Listen to Voice Message (Space)", callback: () => this.sound.play('rintsukiVoice') },
-                    { text: "Leave", callback: () => console.log("Left dialogue.") }
-                ] // include only if you want choices
-            },
-            {
-                english: "You came all the way here?",
-                japanese: "わざわざ来てくれたの？"
+                { 
+                    text: "Listen to Voice Message (Space)", 
+                    callback: () => {
+                        this.time.delayedCall(1000, rintsukiVoiceMessageDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles));
+                    }
+                },
+                { 
+                    text: "Leave", 
+                    callback: () => console.log("Player left dialogue.") 
+                }
+                ]
             }
-        ]);  
+        ]);
+
+        
+          
+          
+        
+        // rintsukiVoiceDialogue.startDialogue([
+        //     {
+        //         english: "Hey, Void! Long time no see.",
+        //         japanese: "やあ、ヴォイド！久しぶりだね。", // put spaces for long sentences to make sure it wraps correctly
+        //         // voiceKey: 'rintsukiVoice', // only include if you want audio to play immediately
+        //         choices: [
+        //             { text: "Listen to Voice Message (Space)", callback: () => this.sound.play('rintsukiVoice') },
+        //             { text: "Leave", callback: () => console.log("Left dialogue.") }
+        //         ] // include only if you want choices
+        //     },
+        //     {
+        //         english: "You came all the way here?",
+        //         japanese: "わざわざ来てくれたの？"
+        //     }
+        // ]);  
 
         // // test with no options or 
-        // this.dialogue.startDialogue([
+        // rintsukiVoiceDialogue.startDialogue([
         //     {
         //         english: "Hey, Void! Hello Hlelo heloo tesitng out a long message to see how it owrks :D. Long time no see.",
         //         japanese: "やあ、ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ 久しぶりだね。"

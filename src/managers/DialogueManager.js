@@ -11,6 +11,7 @@ export default class DialogueManager {
         this.bilingual = config.bilingual ?? false;
         this.typingSpeed = config.typingSpeed || 30;
 
+        this.avatarName = config.avatarName || 'Risu';
         this.avatarKey = config.avatarKey || rintsukiAvatar;
         this.dialogueBoxKey = config.dialogueBoxKey || dialogueBox;
 
@@ -20,7 +21,6 @@ export default class DialogueManager {
 
     createUI() {
         const { width, height } = this.scene.cameras.main;
-        console.log(width, height);
 
         // Dialogue box
         this.dialogueBox = this.scene.add.image(width / 2, height-200, this.dialogueBoxKey)
@@ -43,8 +43,16 @@ export default class DialogueManager {
             this.avatar.setScale(scale);
         }
 
+        // Name text 
+        this.textName = this.scene.add.text(560, height - 320, this.avatarName, {
+            fontFamily: this.fontFamily,
+            fontSize: '36px',
+            color: 'rgb(255, 238, 213)',
+            wordWrap: { width: (width - 1000) / 2 - 10 }
+        }).setDepth(102).setScrollFactor(0);
+
         // English text (left half)
-        this.textEnglish = this.scene.add.text(500, height - 250, '', {
+        this.textEnglish = this.scene.add.text(530, height - 250, '', {
             fontFamily: this.fontFamily,
             fontSize: '36px',
             color: '#333333',
@@ -63,6 +71,7 @@ export default class DialogueManager {
 
         this.dialogueBox.setVisible(false);
         if (this.avatar) this.avatar.setVisible(false);
+        this.textName.setVisible(false);
         this.textEnglish.setVisible(false);
         if (this.textJapanese) this.textJapanese.setVisible(false);
     }
@@ -72,6 +81,7 @@ export default class DialogueManager {
 
         this.dialogueBox.setVisible(true);
         if (this.avatar) this.avatar.setVisible(true);
+        this.textName.setVisible(true);
         this.textEnglish.setVisible(true);
         if (this.textJapanese) this.textJapanese.setVisible(true);
 
@@ -79,7 +89,6 @@ export default class DialogueManager {
             await this.showLine(line);
         }
 
-        // Clean up or hide after
         this.hideDialogue();
     }
 
@@ -137,11 +146,11 @@ export default class DialogueManager {
             return;
         }
 
-        const baseY = this.scene.cameras.main.height - 60;
+        const baseY = this.scene.cameras.main.height - 130;
         choices.forEach((choice, idx) => {
-            const btn = this.scene.add.text(300 + idx * 160, baseY, `[${choice.text}]`, {
+            const btn = this.scene.add.text(550 + idx * 600, baseY, `[${choice.text}]`, {
                 fontFamily: this.fontFamily,
-                fontSize: '18px',
+                fontSize: '24px',
                 color: '#ffcc88',
                 backgroundColor: 'rgba(0,0,0,0.4)',
                 padding: { x: 10, y: 5 }
@@ -163,6 +172,7 @@ export default class DialogueManager {
 
         this.dialogueBox.setVisible(true);
         if (this.avatar) this.avatar.setVisible(true);
+        this.textName.setVisible(true);
         this.textEnglish.setVisible(true);
         if (this.textJapanese) this.textJapanese.setVisible(true);
 
@@ -202,6 +212,7 @@ export default class DialogueManager {
     hideDialogue() {
         if (this.dialogueBox) this.dialogueBox.setVisible(false);
         if (this.avatar) this.avatar.setVisible(false);
+        if (this.textName) this.textName.setVisible(false);
         if (this.textEnglish) this.textEnglish.setVisible(false);
         if (this.textJapanese) this.textJapanese.setVisible(false);
         this.choiceButtons.forEach(btn => btn.destroy());
