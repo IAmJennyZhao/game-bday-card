@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+*vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.clip
+yapanese-shrine/src/assets/unused_assets/*
+yapanese-shrine/src/assets/video/messages/Howl_Void_Happy_Birthday_Message.mp4
+yapanese-shrine/src/assets/video/messages/raw/*
+yapanese-shrine/src/assets/iamges/raw/*
