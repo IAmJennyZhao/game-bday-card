@@ -1,4 +1,4 @@
-import { quests, allComplete } from '../managers/QuestManager.js';
+import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
 import DialogueManager from '../managers/DialogueManager.js';
 import { bg, player, dialogueBox, rintsukiVoice, rintsukiAvatar } from '../assets';  
 
@@ -58,10 +58,14 @@ export default class MainScene extends Phaser.Scene {
 
         // Define interact zones (x, y, id)
         this.zones = [
-            { x: 1070, y: 820, id: 'torii_gate_friend' },
-            { x: 300, y: 880, id: 'grass_friend_1' },
-            { x: 1790, y: 870, id: 'grass_friend_2' },
-            { x: 1380, y: 700, id: 'picnic_friend_1' },
+            { x: 1070, y: 820, id: 'Rintsuki' },
+            { x: 300, y: 880, id: 'Howl' },
+            { x: 1790, y: 870, id: 'Levenski' },
+            { x: 1380, y: 700, id: 'Santru' },
+            // { x: 1070, y: 820, id: 'torii_gate_friend' },
+            // { x: 300, y: 880, id: 'grass_friend_1' },
+            // { x: 1790, y: 870, id: 'grass_friend_2' },
+            // { x: 1380, y: 700, id: 'picnic_friend_1' },
             { x: 1500, y: 700, id: 'picnic_friend_2' },
             { x: 1360, y: 540, id: 'picnic_friend_3' },
             { x: 1430, y: 540, id: 'picnic_friend_4' },
@@ -75,7 +79,6 @@ export default class MainScene extends Phaser.Scene {
             { x: 500, y: 720, id: 'portal_friend' },
             { x: 170, y: 620, id: 'portal' },
             { x: 380, y: 460, id: 'archery' },
-            // { x: 1500, y: 610, id: 'picnic' },
             { x: 870, y: 390, id: 'gacha_shrine' }
         ];
 
@@ -135,8 +138,27 @@ export default class MainScene extends Phaser.Scene {
     }
 
     handleInteraction(id) {
-        if (id === 'portal' && allComplete()) {
-            this.scene.start('EndingScene');
+        if (id === 'portal') {
+            if (allComplete()) {
+                this.scene.start('EndingScene');
+            } else {
+                let messageDict = getMissingMessage();
+                // TODO: Update with Risu's avatars
+                let risuDialogue = new DialogueManager(this, {
+                    avatarName: "Risu",
+                    avatarKey: 'rintsukiAvatar',
+                    dialogueBoxKey: 'dialogueBox',
+                    fontFamily: 'PixelFont',
+                    bilingual: true
+                });
+                risuDialogue.startDialogue([
+                    {
+                        english: messageDict[0],
+                        japanese: messageDict[1],
+                        // voiceKey: 'rintsuki',
+                    }
+                ]);
+            }
             return;
         }
 
@@ -198,6 +220,7 @@ export default class MainScene extends Phaser.Scene {
                     text: "Listen to Voice Message (Space)", 
                     callback: () => {
                         this.time.delayedCall(1000, rintsukiVoiceMessageDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles));
+                        this.markQuest(id);
                     }
                 },
                 { 
@@ -207,45 +230,9 @@ export default class MainScene extends Phaser.Scene {
                 ]
             }
         ]);
-
-        
-          
-          
-        
-        // rintsukiVoiceDialogue.startDialogue([
-        //     {
-        //         english: "Hey, Void! Long time no see.",
-        //         japanese: "やあ、ヴォイド！久しぶりだね。", // put spaces for long sentences to make sure it wraps correctly
-        //         // voiceKey: 'rintsukiVoice', // only include if you want audio to play immediately
-        //         choices: [
-        //             { text: "Listen to Voice Message (Space)", callback: () => this.sound.play('rintsukiVoice') },
-        //             { text: "Leave", callback: () => console.log("Left dialogue.") }
-        //         ] // include only if you want choices
-        //     },
-        //     {
-        //         english: "You came all the way here?",
-        //         japanese: "わざわざ来てくれたの？"
-        //     }
-        // ]);  
-
-        // // test with no options or 
-        // rintsukiVoiceDialogue.startDialogue([
-        //     {
-        //         english: "Hey, Void! Hello Hlelo heloo tesitng out a long message to see how it owrks :D. Long time no see.",
-        //         japanese: "やあ、ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ 久しぶりだね。"
-        //     },
-        //     {
-        //         english: "You came all the way here?",
-        //         japanese: "わざわざ来てくれたの？"
-        //     }
-        // ]);
     }
 
     markQuest(id) {
-        // TODO: update quest progression
-        if (id === 'rintsuki') quests.talkedToRintsuki = true;
-        if (id === 'grassFriend') quests.talkedToGrassFriend = true;
-        if (id === 'picnic') quests.talkedToPicnic = true;
-        if (id === 'bridgeFriend') quests.talkedToBridgeFriend = true;
+        quests.talkedToNPCs[id] = true;
     }
 }

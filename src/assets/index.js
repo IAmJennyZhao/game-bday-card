@@ -32,7 +32,7 @@ import explosion from './images/explosion_fx.png';
 
 // voice message assets
 import dialogueBox from './ui/dialogue_box.png';
-import rintsukiVoice from './video/messages/rintsuki.mp3';  
+import rintsukiVoice from './video/messages/rintsuki.wav';
 
 // avatar assets
 import rintsukiAvatar from './npc_avatars/rintsuki.png';
