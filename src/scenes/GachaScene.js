@@ -6,28 +6,28 @@ export default class GachaScene extends Phaser.Scene {
 
     preload() {
         // Load all gacha videos
-        this.load.video('4StarGenshin', '/src/assets/video/gachas/4star_genshin.mp4');
-        this.load.video('4StarWuwa', '/src/assets/video/gachas/4star_wuwa.mp4');
-        this.load.video('4StarHSR', '/src/assets/video/gachas/4star_hsr.mp4');
-        this.load.video('5StarGenshin', '/src/assets/video/gachas/5star_genshin.mp4');
-        this.load.video('5StarWuwa', '/src/assets/video/gachas/5star_wuwa.mp4');
-        this.load.video('5StarHSR', '/src/assets/video/gachas/5star_hsr.mp4');
+        this.load.video('4StarGenshin', './src/assets/video/gachas/4star_genshin.mp4');
+        this.load.video('4StarWuwa', './src/assets/video/gachas/4star_wuwa.mp4');
+        this.load.video('4StarHSR', './src/assets/video/gachas/4star_hsr.mp4');
+        this.load.video('5StarGenshin', './src/assets/video/gachas/5star_genshin.mp4');
+        this.load.video('5StarWuwa', './src/assets/video/gachas/5star_wuwa.mp4');
+        this.load.video('5StarHSR', './src/assets/video/gachas/5star_hsr.mp4');
 
         // load all prize images
-        this.load.image('4_star_dr_pepper', '/src/assets/video/gachas/prize_imgs/4_star_dr_pepper.png');
-        this.load.image('4_star_dumplings', '/src/assets/video/gachas/prize_imgs/4_star_dumplings.png');
-        this.load.image('4_star_jinhsi', '/src/assets/video/gachas/prize_imgs/4_star_jinhsi.png');
-        this.load.image('4_star_kansai_ben', '/src/assets/video/gachas/prize_imgs/4_star_kansai_ben.png');
-        this.load.image('4_star_nekota_tsuna', '/src/assets/video/gachas/prize_imgs/4_star_nekota_tsuna.png');
-        this.load.image('4_star_overwatch', '/src/assets/video/gachas/prize_imgs/4_star_overwatch.png');
-        this.load.image('4_star_reaver_vandal', '/src/assets/video/gachas/prize_imgs/4_star_reaver_vandal.png');
-        this.load.image('4_star_rushia', '/src/assets/video/gachas/prize_imgs/4_star_rushia.png');
-        this.load.image('4_star_vrc', '/src/assets/video/gachas/prize_imgs/4_star_vrc.png');
-        this.load.image('4_star_wuwa', '/src/assets/video/gachas/prize_imgs/4_star_wuwa.png');
-        this.load.image('5_star_camellya', '/src/assets/video/gachas/prize_imgs/5_star_camellya.png');
-        this.load.image('5_star_japanese_souffle_pancakees', '/src/assets/video/gachas/prize_imgs/5_star_japanese_souffle_pancakees.png');
-        this.load.image('5_star_risu', '/src/assets/video/gachas/prize_imgs/5_star_risu.png');
-        this.load.image('5_star_valorant', '/src/assets/video/gachas/prize_imgs/5_star_valorant.png');
+        this.load.image('4_star_dr_pepper', './src/assets/video/gachas/prize_imgs/4_star_dr_pepper.png');
+        this.load.image('4_star_dumplings', './src/assets/video/gachas/prize_imgs/4_star_dumplings.png');
+        this.load.image('4_star_jinhsi', './src/assets/video/gachas/prize_imgs/4_star_jinhsi.png');
+        this.load.image('4_star_kansai_ben', './src/assets/video/gachas/prize_imgs/4_star_kansai_ben.png');
+        this.load.image('4_star_nekota_tsuna', './src/assets/video/gachas/prize_imgs/4_star_nekota_tsuna.png');
+        this.load.image('4_star_overwatch', './src/assets/video/gachas/prize_imgs/4_star_overwatch.png');
+        this.load.image('4_star_reaver_vandal', './src/assets/video/gachas/prize_imgs/4_star_reaver_vandal.png');
+        this.load.image('4_star_rushia', './src/assets/video/gachas/prize_imgs/4_star_rushia.png');
+        this.load.image('4_star_vrc', './src/assets/video/gachas/prize_imgs/4_star_vrc.png');
+        this.load.image('4_star_wuwa', './src/assets/video/gachas/prize_imgs/4_star_wuwa.png');
+        this.load.image('5_star_camellya', './src/assets/video/gachas/prize_imgs/5_star_camellya.png');
+        this.load.image('5_star_japanese_souffle_pancakees', './src/assets/video/gachas/prize_imgs/5_star_japanese_souffle_pancakees.png');
+        this.load.image('5_star_risu', './src/assets/video/gachas/prize_imgs/5_star_risu.png');
+        this.load.image('5_star_valorant', './src/assets/video/gachas/prize_imgs/5_star_valorant.png');
     }
 
 
