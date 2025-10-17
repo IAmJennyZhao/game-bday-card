@@ -25,15 +25,23 @@ import fiveStarJapaneseSoufflePancakes from './video/gachas/prize_imgs/5_star_ja
 import fiveStarRisu from './video/gachas/prize_imgs/5_star_risu.png';
 import fiveStarValorant from './video/gachas/prize_imgs/5_star_valorant.png';
 
-// guns
+// shooting range assets
 import valorantBG from './images/valorant_range_bg.png';
 import gun from './images/prime_vandal.png';
 import explosion from './images/explosion_fx.png';
+
+// voice message assets
+import dialogueBox from './ui/dialogue_box.png';
+import rintsukiVoice from './video/messages/rintsuki.mp3';  
+
+// avatar assets
+import rintsukiAvatar from './npc_avatars/rintsuki.png';
 
 export { bg, player, 
     fourStarGenshinVideo, fourStarWuwaVideo, fourStarHSRVideo, fiveStarGenshinVideo, fiveStarWuwaVideo, fiveStarHSRVideo,
     fourStarDrPepper, fourStarDumplings, fourStarJinhsi, fourStarKansaiBen, fourStarNekotaTsuna,
     fourStarOverwatch, fourStarReaverVandal, fourStarRushia, fourStarVrcgun, fourStarWuwa, 
     fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarValorant,
-    valorantBG, gun, explosion
+    valorantBG, gun, explosion,
+    dialogueBox, rintsukiVoice, rintsukiAvatar
  };

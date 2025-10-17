@@ -1,6 +1,6 @@
 import { quests, allComplete } from '../managers/QuestManager.js';
-import { dialogues } from '../managers/DialogueManager.js';
-import { bg, player } from '../assets';
+import DialogueManager from '../managers/DialogueManager.js';
+import { bg, player, dialogueBox, rintsukiVoice, rintsukiAvatar } from '../assets';  
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -11,6 +11,10 @@ export default class MainScene extends Phaser.Scene {
         // load background image and sprite
         this.load.image('bg', bg);
         this.load.spritesheet('player', player, { frameWidth: 78, frameHeight: 210 });
+        
+        this.load.image('dialogueBox', dialogueBox);
+        this.load.audio('rintsukiVoice', rintsukiVoice);
+        this.load.image('rintsukiAvatar', rintsukiAvatar);
     }
 
 
@@ -34,9 +38,6 @@ export default class MainScene extends Phaser.Scene {
 
         // // Optional: Make the background fixed relative to the camera
         // backgroundImage.setScrollFactor(0);
-
-
-
 
         // Player setup
         this.player = this.physics.add.sprite(950, 900, 'player');
@@ -89,6 +90,14 @@ export default class MainScene extends Phaser.Scene {
             InCutscene: 'InCutscene'
         };
         this.interactionState = this.InteractionStates.None;
+
+        // Dialogue Managers
+        this.dialogue = new DialogueManager(this, {
+            avatarKey: 'rintsukiAvatar',
+            dialogueBoxKey: 'dialogueBox',
+            fontFamily: 'PixelFont',
+            bilingual: true
+        });
     }
 
     update() {
@@ -124,7 +133,7 @@ export default class MainScene extends Phaser.Scene {
             this.interactText.setText('');
         }
     }
-w
+
     handleInteraction(id) {
         if (id === 'portal' && allComplete()) {
             this.scene.start('EndingScene');
@@ -153,25 +162,34 @@ w
     }
 
 
-    playDialogue(id) {
-        // find lines and play dialogue
-        const lines = dialogues[id];
-        if (!lines) return;
-        let i = 0;
-        this.interactionState = this.InteractionStates.InDialogue;
-        const textObj = this.add.text(50, 450, lines[i], { font: '18px monospace', fill: '#fff', backgroundColor: '#0008' });
-        const advance = () => {
-            i++;
-            if (i >= lines.length) {
-                // finish dialogue and mark quest complete
-                textObj.destroy();
-                this.markQuest(id);
-                this.input.keyboard.off('keydown-SPACE', advance);
-                
-                this.interactionState = this.InteractionStates.None;
-            } else textObj.setText(lines[i]);
-        };
-        this.input.keyboard.on('keydown-SPACE', advance);
+    playDialogue(id) {        
+        this.dialogue.startDialogue([
+            {
+                english: "Hey, Void! Long time no see.",
+                japanese: "やあ、ヴォイド！久しぶりだね。",
+                // voiceKey: 'rintsukiVoice', // only include if you want audio to play immediately
+                choices: [
+                    { text: "Listen to Voice Message (Space)", callback: () => this.sound.play('rintsukiVoice') },
+                    { text: "Leave", callback: () => console.log("Left dialogue.") }
+                ] // include only if you want choices
+            },
+            {
+                english: "You came all the way here?",
+                japanese: "わざわざ来てくれたの？"
+            }
+        ]);  
+
+        // // test with no options or 
+        // this.dialogue.startDialogue([
+        //     {
+        //         english: "Hey, Void! Hello Hlelo heloo tesitng out a long message to see how it owrks :D. Long time no see.",
+        //         japanese: "やあ、ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ ヴォイド！ 久しぶりだね。"
+        //     },
+        //     {
+        //         english: "You came all the way here?",
+        //         japanese: "わざわざ来てくれたの？"
+        //     }
+        // ]);
     }
 
     markQuest(id) {
