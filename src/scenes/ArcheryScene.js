@@ -4,9 +4,9 @@ export default class ArcheryScene extends Phaser.Scene {
     constructor() { super('ArcheryScene'); }
 
     preload() {
-        this.load.image('valorantBG', 'src/assets/images/valorant_range_bg.png');
-        this.load.image('gun', 'src/assets/images/prime_vandal.png');       // cropped gun png
-        this.load.image('explosion', 'src/assets/images/explosion_fx.png'); // small “bang” PNG
+        this.load.image('valorantBG', '/src/assets/images/valorant_range_bg.png');
+        this.load.image('gun', '/src/assets/images/prime_vandal.png');       // cropped gun png
+        this.load.image('explosion', '/src/assets/images/explosion_fx.png'); // small “bang” PNG
     }
 
     create() {

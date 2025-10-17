@@ -8,8 +8,8 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         // load background image and sprite
-        this.load.image('bg', 'src/assets/images/background.png');
-        this.load.spritesheet('player', 'src/assets/player.png', { frameWidth: 78, frameHeight: 210 });
+        this.load.image('bg', '/src/assets/images/background.png');
+        this.load.spritesheet('player', '/src/assets/player.png', { frameWidth: 78, frameHeight: 210 });
     }
 
 
