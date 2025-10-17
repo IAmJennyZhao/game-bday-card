@@ -27,16 +27,18 @@ export default class ArcheryScene extends Phaser.Scene {
         this.gun = this.add.image(1800, 900, 'gun').setDepth(5).setScale(0.5);
 
         // title and timer text
-        this.add.text(300, 30, '🏹 Archery Range', { font: '24px monospace', fill: '#fff' });
+        this.add.text(300, 30, '🏹 Archery Range (GET 100 Points!)', { font: '30px monospace', fill: '#fff' , backgroundColor: '#0008' }).setDepth(10);
+        this.add.text(700, 160, 'GET 100 POINTS', { font: '60px monospace', fill: '#058d32ff' , backgroundColor: 'rgba(255, 255, 255, 1)' }).setDepth(10);
         this.timer = 20;
-        this.timerText = this.add.text(800, 50, 'Time: 20', { font: '18px monospace', fill: '#fff' }).setDepth(10);
+        this.timerText = this.add.text(1200, 30, 'Time: 20', { font: '30px monospace', fill: '#fff' , backgroundColor: '#0008' }).setDepth(10);
         
         // score text
         this.score = 0;
-        this.scoreText = this.add.text(20, 20, 'Score: 0', {
-        fontSize: '24px',
-        fill: '#fff',
-        fontFamily: 'monospace'
+        this.scoreText = this.add.text(20, 400, 'Score: 0', {
+        fontSize: '30px',
+        fill: '#000000ff',
+        fontFamily: 'monospace', 
+        backgroundColor: 'rgba(255, 255, 255, 1)'
         }).setDepth(10);
 
         // countdown timer
@@ -58,10 +60,10 @@ export default class ArcheryScene extends Phaser.Scene {
         const x = Phaser.Math.Between(400, 1200);
         const y = Phaser.Math.Between(400, 700);
 
-        this.targets.push(this.add.circle(x, y, 50, 0xffffff));
-        this.targets.push(this.add.circle(x, y, 45, 0xff0000));
-        this.targets.push(this.add.circle(x, y, 30, 0xffffff));
-        this.targets.push(this.add.circle(x, y, 15, 0xff0000));
+        this.targets.push(this.add.circle(x, y, 32, 0xffffff));
+        this.targets.push(this.add.circle(x, y, 30, 0xff0000));
+        this.targets.push(this.add.circle(x, y, 20, 0xffffff));
+        this.targets.push(this.add.circle(x, y, 10, 0xff0000));
 
         // // make it bob slightly for motion
         // this.tweens.add({
@@ -80,7 +82,7 @@ export default class ArcheryScene extends Phaser.Scene {
         // small gun recoil animation
         this.tweens.add({
             targets: this.gun,
-            angle: -10,
+            angle: 10,
             duration: 50,
             yoyo: true
         });
@@ -89,24 +91,25 @@ export default class ArcheryScene extends Phaser.Scene {
         let target = this.targets[0];
         const d = Phaser.Math.Distance.Between(pointer.x, pointer.y, target.x, target.y);
         let pts = 0;
-        if (d < 15) pts = 10;
-        else if (d < 30) pts = 3;
-        else if (d < 45) pts = 1;
+        if (d < 10) pts = 10;
+        else if (d < 20) pts = 3;
+        else if (d < 32) pts = 1;
         
         const hit = pts > 0 ? target : null;
         if (hit) {
             this.createExplosion(hit.x, hit.y);
-            this.showPoints(hit.x, hit.y, `+${pts}!`);
+            this.showPoints(hit.x, hit.y, `+${pts}!`, false);
             this.score += pts;
             this.scoreText.setText('Score: ' + this.score);
             this.spawnTarget();
         } else {
-            this.showPoints(pointer.x, pointer.y, 'Miss (lol)');
+            console.log('miss');
+            this.showPoints(pointer.x, pointer.y, 'Miss (lol)', true);
         }
     }
 
     createExplosion(x, y) {
-        const exp = this.add.image(x, y, 'explosion').setDepth(2).setScale(0.3);
+        const exp = this.add.image(x, y, 'explosion').setDepth(2).setScale(0.1);
         this.tweens.add({
             targets: exp,
             alpha: 0,
@@ -115,10 +118,10 @@ export default class ArcheryScene extends Phaser.Scene {
         });
     }
 
-    showPoints(x, y, text) {
+    showPoints(x, y, text, miss=false) {
         const popup = this.add.text(x, y, text, {
-            fontSize: '20px',
-            fill: text === 'Miss' ? '#f55' : '#0f0',
+            fontSize: '40px',
+            fill: miss ? 'rgba(255, 46, 46, 1)' : '#0f0',
             fontFamily: 'monospace'
         }).setDepth(3).setOrigin(0.5);
         this.tweens.add({
@@ -133,9 +136,9 @@ export default class ArcheryScene extends Phaser.Scene {
     endGame() {
         if (this.score >= 50) {
             quests.archeryComplete = true;
-            this.add.text(350, 250, '✅ Passed!', { font: '24px monospace', fill: '#0f0' });
+            this.add.text(350, 250, '✅ Passed!', { font: '100px monospace', fill: '#0f0' });
         } else {
-            this.add.text(320, 250, '❌ Try Again!', { font: '24px monospace', fill: '#f00' });
+            this.add.text(320, 250, '❌ Try Again!', { font: '100px monospace', fill: '#f00' });
         }
         this.time.delayedCall(2000, () => this.scene.start('MainScene'));
     }
