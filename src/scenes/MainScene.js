@@ -1,5 +1,5 @@
 import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
-import DialogueManager from '../managers/DialogueManager.js';
+import DialogueManager, {dialogueData} from '../managers/DialogueManager.js';
 import { bg, player, dialogueBox, rintsukiVoice, rintsukiAvatar } from '../assets';  
 
 export default class MainScene extends Phaser.Scene {
@@ -188,42 +188,35 @@ export default class MainScene extends Phaser.Scene {
 
 
     playDialogue(id) {
+        id = 'Rintsuki'; // TEMPORARY: force rintsuki for testing
+
         this.interactionState = this.InteractionStates.InDialogue;
-        // rintsukiVoiceDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles);
-        let rintsukiVoiceDialogue = new DialogueManager(this, {
-            avatarName: "Rintsuki",
-            avatarKey: 'rintsukiAvatar',
-            dialogueBoxKey: 'dialogueBox',
+        let npcVoiceDialogue = new DialogueManager(this, {
+            avatarName: dialogueData[id].avatarName,
+            avatarKey: dialogueData[id].avatarKey,
+            dialogueBoxKey: dialogueData[id].dialogueBoxKey,
             fontFamily: 'PixelFont',
             bilingual: true
         });
 
-        const rintsukiSubtitles = [
-            { time: 0.0, english: "Happy Birthday, Void!", japanese: "ハッピーバースデー、ヴォイド！" },
-            { time: 2.7, english: "Happy Birthday (in japanese :D)", japanese: "お誕生日おめでとう。" },
-            { time: 4.2, english: "Let's continue to get along! <3", japanese: "これからも、仲良くしようね。" },
-            { time: 7.4, english: "Whether it's gaming or chatting or anything really, let's hangout with everyone again.", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
-            { time: 11.2, english: "Take care, and congrats again on turning 19 years old!", japanese: "いいじゃんしてね！ 19才改めておめでとう！！" },
-        ];
-
-        let rintsukiVoiceMessageDialogue = new DialogueManager(this, {
-            avatarName: "Rintsuki",
-            avatarKey: 'rintsukiAvatar',
-            dialogueBoxKey: 'dialogueBox',
+        let npcVoiceMessageDialogue = new DialogueManager(this, {
+            avatarName: dialogueData[id].avatarName,
+            avatarKey: dialogueData[id].avatarKey,
+            dialogueBoxKey: dialogueData[id].dialogueBoxKey,
             fontFamily: 'PixelFont',
             bilingual: true
         });
 
-        rintsukiVoiceDialogue.startDialogue([
+        npcVoiceDialogue.startDialogue([
             {
-                english: "Hey, Void! Long time no see.",
-                japanese: "やあ、ヴォイド！久しぶりだね。",
-                // voiceKey: 'rintsuki',
+                english: dialogueData[id].initialDialogue.english,
+                japanese: dialogueData[id].initialDialogue.japanese,
+                voiceKey: dialogueData[id].initialDialogue.voiceKey,
                 choices: [
                 { 
                     text: "Listen to Voice Message (Space)", 
                     callback: () => {
-                        this.time.delayedCall(1000, rintsukiVoiceMessageDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles, () => {
+                        this.time.delayedCall(1000, npcVoiceMessageDialogue.playSubtitledAudio(dialogueData[id].avatarVoiceMessage, dialogueData[id].subtitles, () => {
                             this.interactionState = this.InteractionStates.None;
                         }));
                         this.markQuest(id);
@@ -232,7 +225,6 @@ export default class MainScene extends Phaser.Scene {
                 { 
                     text: "Leave (Q)", 
                     callback: () => {
-                        console.log("Player left dialogue.");
                         this.interactionState = this.InteractionStates.None;
                     }
                 }

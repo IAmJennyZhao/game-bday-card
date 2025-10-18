@@ -226,3 +226,25 @@ export default class DialogueManager {
         this.choiceButtons = [];
     }
 }
+
+
+export const dialogueData = {
+    'Rintsuki': {
+        avatarName: "Rintsuki",
+        avatarKey: 'rintsukiAvatar',
+        dialogueBoxKey: 'dialogueBox',
+        avatarVoiceMessage: 'rintsukiVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "Happy Birthday, Void!", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 2.7, english: "Happy Birthday (in japanese :D)", japanese: "お誕生日おめでとう。" },
+            { time: 4.2, english: "Let's continue to get along! <3", japanese: "これからも、仲良くしようね。" },
+            { time: 7.4, english: "Whether it's gaming or chatting or anything really, let's hangout with everyone again.", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
+            { time: 11.2, english: "Take care, and congrats again on turning 19 years old!", japanese: "いいじゃんしてね！ 19才改めておめでとう！！" },
+        ]
+    }
+};
