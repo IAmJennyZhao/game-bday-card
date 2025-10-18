@@ -3,7 +3,7 @@ import { quests } from '../managers/QuestManager.js';
 import { fourStarGenshinVideo, fourStarWuwaVideo, fourStarHSRVideo, fiveStarGenshinVideo, fiveStarWuwaVideo, fiveStarHSRVideo,
     fourStarDrPepper, fourStarDumplings, fourStarJinhsi, fourStarKansaiBen, fourStarNekotaTsuna,
     fourStarOverwatch, fourStarReaverVandal, fourStarRushia, fourStarVrcgun, fourStarWuwa, 
-    fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarValorant } from '../assets';
+    fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarCola, fiveStarValorant } from '../assets';
 
 export default class GachaScene extends Phaser.Scene {
     constructor() { super('GachaScene'); }
@@ -31,6 +31,7 @@ export default class GachaScene extends Phaser.Scene {
         this.load.image('fiveStarCamellya', fiveStarCamellya);
         this.load.image('fiveStarJapaneseSoufflePancakes', fiveStarJapaneseSoufflePancakes);
         this.load.image('fiveStarRisu', fiveStarRisu);
+        this.load.image('fiveStarCola', fiveStarCola);
         this.load.image('fiveStarValorant', fiveStarValorant);
     }
 
@@ -62,7 +63,7 @@ export default class GachaScene extends Phaser.Scene {
         ];
         this.prizeImgs = ['fourStarDrPepper', 'fourStarDumplings', 'fourStarJinhsi', 'fourStarKansaiBen', 'fourStarNekotaTsuna',
             'fourStarOverwatch', 'fourStarReaverVandal', 'fourStarRushia', 'fourStarVrcgun', 'fourStarWuwa', 
-            'fiveStarCamellya', 'fiveStarJapaneseSoufflePancakes', 'fiveStarRisu', 'fiveStarValorant'
+            'fiveStarCamellya', 'fiveStarJapaneseSoufflePancakes', 'fiveStarRisu', 'fiveStarCola', 'fiveStarValorant'
         ];
 
         // Pull states

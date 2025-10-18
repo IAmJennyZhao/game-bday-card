@@ -23,6 +23,7 @@ import fourStarWuwa from './video/gachas/prize_imgs/4_star_wuwa.png';
 import fiveStarCamellya from './video/gachas/prize_imgs/5_star_camellya.png';
 import fiveStarJapaneseSoufflePancakes from './video/gachas/prize_imgs/5_star_japanese_souffle_pancakees.png';
 import fiveStarRisu from './video/gachas/prize_imgs/5_star_risu.png';
+import fiveStarCola from './video/gachas/prize_imgs/5_star_cola.png';
 import fiveStarValorant from './video/gachas/prize_imgs/5_star_valorant.png';
 
 // shooting range assets
@@ -41,7 +42,7 @@ export { bg, player,
     fourStarGenshinVideo, fourStarWuwaVideo, fourStarHSRVideo, fiveStarGenshinVideo, fiveStarWuwaVideo, fiveStarHSRVideo,
     fourStarDrPepper, fourStarDumplings, fourStarJinhsi, fourStarKansaiBen, fourStarNekotaTsuna,
     fourStarOverwatch, fourStarReaverVandal, fourStarRushia, fourStarVrcgun, fourStarWuwa, 
-    fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarValorant,
+    fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarCola, fiveStarValorant,
     valorantBG, gun, explosion,
     dialogueBox, rintsukiVoice, rintsukiAvatar
  };
