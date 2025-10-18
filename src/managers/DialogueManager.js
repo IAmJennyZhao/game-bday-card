@@ -229,10 +229,26 @@ export default class DialogueManager {
 
 
 export const dialogueData = {
+    'Bumblebee': {
+        avatarName: "Bumblebee",
+        avatarKey: 'bumblebeeAvatar',
+        avatarVoiceMessage: 'bumblebeeVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "Happy Birthday, Void!", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 2.7, english: "Congrats on hitting 19 years old. so awesome.", japanese: "お誕生日おめでとう。" },
+            { time: 6.2, english: "When you finish celebrating, we should play more freaking overwatch and hit diamond.", japanese: "これからも、仲良くしようね。" },
+            { time: 12, english: "Happy Birthday femboyyyyy", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね"}
+        ]
+    },
+    
     'Rintsuki': {
         avatarName: "Rintsuki",
         avatarKey: 'rintsukiAvatar',
-        dialogueBoxKey: 'dialogueBox',
         avatarVoiceMessage: 'rintsukiVoice',
         initialDialogue: {
             english: "Hey, Void! Long time no see.",
@@ -244,7 +260,125 @@ export const dialogueData = {
             { time: 2.7, english: "Happy Birthday (in japanese :D)", japanese: "お誕生日おめでとう。" },
             { time: 4.2, english: "Let's continue to get along! <3", japanese: "これからも、仲良くしようね。" },
             { time: 7.4, english: "Whether it's gaming or chatting or anything really, let's hangout with everyone again.", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
-            { time: 11.2, english: "Take care, and congrats again on turning 19 years old!", japanese: "いいじゃんしてね！ 19才改めておめでとう！！" },
+            { time: 11.2, english: "Hope you have a good year! Congrats again on turning 19 years old!", japanese: "いい一年にしてね 19才改めておめでとう！！" },
         ]
-    }
+    },
+    
+    'Macs': {
+        avatarName: "Macs",
+        avatarKey: 'macsAvatar',
+        avatarVoiceMessage: 'macsVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "Happy Birthday, Void!", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 3, english: "I hope your awesome weirdness shines all year long", japanese: "お誕生日おめでとう。" },
+            { time: 6, english: "and may your “perfectly imperfect” English keep making us laugh and like you even more!", japanese: "これからも、仲良くしようね。" }
+        ]
+    },
+    
+    'Levenski': {
+        avatarName: "Levenski",
+        avatarKey: 'levenskiAvatar',
+        avatarVoiceMessage: 'levenskiVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "hey Bro, I just wanted to say happy birthday and also did you know today was the day you were born?", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 6, english: "fuck I didn't know til you told me", japanese: "お誕生日おめでとう。" },
+            { time: 9, english: "but hey, on a real note, I wanted to tell you that I hope you enjoy the day cause", japanese: "これからも、仲良くしようね。" },
+            { time: 14, english: "it's your day and that I hope that you know a bright future comes", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
+            { time: 20, english: "and I wanted to say that it's been real getting to know you and hang out whenever bro", japanese: "いい一年にしてね 19才改めておめでとう！！" },
+            { time: 26, english: "if you ever need anything just hmu and i'll be here for you bro", japanese: "いい一年にしてね 19才改めておめでとう！！" },
+            { time: 30, english: "anyways, happy birthday", japanese: "いい一年にしてね 19才改めておめでとう！！" },
+        ] 
+    },
+
+    // HOWL - todo: video 
+    
+    'Anipha': {
+        avatarName: "Anipha",
+        avatarKey: 'aniphaAvatar',
+        avatarVoiceMessage: 'aniphaVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "*anipha noises*", japanese: "*anipha noises*" },
+            { time: 15, english: "Happy Birthday Void. お誕生日おめでとう bro", japanese: "お誕生日おめでとう。*2 bro" },
+        ]
+    },
+    
+    'Santru': {
+        avatarName: "Santru",
+        avatarKey: 'santruAvatar',
+        avatarVoiceMessage: 'santruVoice',
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "誕生日 congratulations bro", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 3, english: "can't believe you're mười chín (19 in vietnameses) years old.", japanese: "お誕生日おめでとう。" },
+            { time: 7, english: "fuck now you're unc 2", japanese: "これからも、仲良くしようね。" },
+            { time: 10, english: "but seriously though, happy birthday dude", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" }
+        ]
+    },
+
+    // TODO:  change these from voice to actual messages :3
+    'Chris': {
+        avatarName: "Chris",
+        avatarKey: 'chrisAvatar',
+        avatarVoiceMessage: null,
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "誕生日おめでとう, Dylan. I'm proud of you to reach the point of where you are now.", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 2.7, english: "Even if things have been hard, I'm glad you've kept going.  ", japanese: "お誕生日おめでとう。" },
+            { time: 4.2, english: "Thank you for being there for me ever since I wanted to do this crazy ass dream to do this Japanese shit.", japanese: "これからも、仲良くしようね。" },
+            { time: 7.4, english: "You've been a big influence on me, and everyone around you.", japanese: "また皆で、ゲームとか通話 とか何でもいいけど、 それで遊ぼうね" },
+            { time: 11.2, english: " Your potential is limitless; happy birthday, brother.", japanese: "いいじゃんしてね！ 19才改めておめでとう！！" },
+        ]
+    },
+    'Scarfy': {
+        avatarName: "Scarfy",
+        avatarKey: 'scarfyAvatar',
+        avatarVoiceMessage: null,
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "Happy Birthday Void!!! We all love you. Good luck in Oregon. We’re always here for you.", japanese: "ハッピーバースデー、ヴォイド！" }
+        ]
+    },
+    'Mel': {
+        avatarName: "Mel",
+        avatarKey: 'melAvatar',
+        avatarVoiceMessage: null,
+        initialDialogue: {
+            english: "Hey, Void! Long time no see.",
+            japanese: "やあ、ヴォイド！久しぶりだね。",
+            voiceKey: null
+        },
+        subtitles: [
+            { time: 0.0, english: "Hi void youre at my age now congrats ur still a kid", japanese: "ハッピーバースデー、ヴォイド！" },
+            { time: 0.0, english: "youre still 17 have a good day happy birthday 🎉🎉🎉", japanese: "ハッピーバースデー、ヴォイド！" },
+        ]
+    },
+
+    
 };

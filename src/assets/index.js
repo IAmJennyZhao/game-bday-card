@@ -31,12 +31,28 @@ import valorantBG from './images/valorant_range_bg.png';
 import gun from './images/prime_vandal.png';
 import explosion from './images/explosion_fx.png';
 
+console.log("waht the mf isaoiwjef oiaw but wahiiiiii");
 // voice message assets
 import dialogueBox from './ui/dialogue_box.png';
+
+import bumblebeeVoice from './video/messages/bumblebee.mp3';
 import rintsukiVoice from './video/messages/rintsuki.wav';
+import macsVoice from './video/messages/macs.m4a';
+import levenskiVoice from './video/messages/levenski.mp3';
+//import howlVoice from './video/messages/howl.mp3'; // TODO howl's vid
+import aniphaVoice from './video/messages/anipha.mp3';
+import santruVoice from './video/messages/santru.wav';
 
 // avatar assets
+import bumblebeeAvatar from './npc_avatars/bumblebee.png';
+import chrisAvatar from './npc_avatars/chris_cropped.png';
 import rintsukiAvatar from './npc_avatars/rintsuki.png';
+import macsAvatar from './npc_avatars/macs.png';
+import levenskiAvatar from './npc_avatars/levenski.png';
+import howlAvatar from './npc_avatars/howl.png'; // TODO: see if you can make howl's avatar a gif
+import aniphaAvatar from './npc_avatars/anipha.png';
+import santruAvatar from './npc_avatars/santru.png';
+import scarfyAvatar from './npc_avatars/scarfy.png';
 
 export { bg, player, 
     fourStarGenshinVideo, fourStarWuwaVideo, fourStarHSRVideo, fiveStarGenshinVideo, fiveStarWuwaVideo, fiveStarHSRVideo,
@@ -44,5 +60,7 @@ export { bg, player,
     fourStarOverwatch, fourStarReaverVandal, fourStarRushia, fourStarVrcgun, fourStarWuwa, 
     fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarCola, fiveStarValorant,
     valorantBG, gun, explosion,
-    dialogueBox, rintsukiVoice, rintsukiAvatar
+    dialogueBox, 
+    bumblebeeVoice, rintsukiVoice, santruVoice, macsVoice, levenskiVoice, /*howlVoice,*/ aniphaVoice,
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, santruAvatar, scarfyAvatar
  };

@@ -1,6 +1,9 @@
 import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
 import DialogueManager, {dialogueData} from '../managers/DialogueManager.js';
-import { bg, player, dialogueBox, rintsukiVoice, rintsukiAvatar } from '../assets';  
+import { bg, player, dialogueBox,
+    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, /*howlVoice,*/ aniphaVoice, santruVoice,
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, santruAvatar, scarfyAvatar
+ } from '../assets';  
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -194,7 +197,7 @@ export default class MainScene extends Phaser.Scene {
         let npcVoiceDialogue = new DialogueManager(this, {
             avatarName: dialogueData[id].avatarName,
             avatarKey: dialogueData[id].avatarKey,
-            dialogueBoxKey: dialogueData[id].dialogueBoxKey,
+            dialogueBoxKey: 'dialogueBox',
             fontFamily: 'PixelFont',
             bilingual: true
         });
@@ -202,7 +205,7 @@ export default class MainScene extends Phaser.Scene {
         let npcVoiceMessageDialogue = new DialogueManager(this, {
             avatarName: dialogueData[id].avatarName,
             avatarKey: dialogueData[id].avatarKey,
-            dialogueBoxKey: dialogueData[id].dialogueBoxKey,
+            dialogueBoxKey: 'dialogueBox',
             fontFamily: 'PixelFont',
             bilingual: true
         });
