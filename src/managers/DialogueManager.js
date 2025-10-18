@@ -6,6 +6,7 @@ export default class DialogueManager {
         this.textEnglish = null;
         this.textJapanese = null;
         this.choiceButtons = [];
+        this.keyListener = null;
 
         this.fontFamily = config.fontFamily || 'PixelFont';
         this.bilingual = config.bilingual ?? false;
@@ -123,25 +124,18 @@ export default class DialogueManager {
                 },
                 loop: true
             });
-
-            // Advance with SPACE if no choices
-            this.scene.input.keyboard.once('keydown-SPACE', () => {
-                timer.remove(false);
-                this.textEnglish.setText(fullEN);
-                if (this.textJapanese) this.textJapanese.setText(fullJP);
-                this.addChoices(choices, resolve);
-            });
         });
     }
 
     addChoices(choices, resolve) {
         // Remove old buttons
+        if (this.keyListener) this.keyListener.off('keydown');
+        this.keyListener = null;
         this.choiceButtons.forEach(btn => btn.destroy());
         this.choiceButtons = [];
 
         if (!choices) {
             // No choices: wait for space again to continue
-            // TODO make space bar work for the listen option
             this.scene.input.keyboard.once('keydown-SPACE', () => resolve());
             return;
         }
@@ -159,15 +153,27 @@ export default class DialogueManager {
                 .setInteractive({ useHandCursor: true })
                 .on('pointerdown', () => {
                     choice.callback?.();
+                    if (this.keyListener) this.keyListener.off('keydown');
+                    this.keyListener = null;
                     this.choiceButtons.forEach(b => b.destroy());
+                    this.choiceButtons = [];
                     resolve();
                 });
             this.choiceButtons.push(btn);
         });
+
+        this.keyListener = this.scene.input.keyboard.on('keydown', (event) => {
+            if (event.code === 'Space') {
+                this.choiceButtons[0].emit('pointerdown');
+            }
+            else if (event.key.toLowerCase() === 'q') {
+                this.choiceButtons[1].emit('pointerdown');
+            }
+        });
     }
 
     /** Subtitle-style auto-advancing dialogue synced with an audio track */
-    playSubtitledAudio(audioKey, subtitles) {
+    playSubtitledAudio(audioKey, subtitles, completeCallback = null) {
         if (!this.dialogueBox) this.createUI();
 
         this.dialogueBox.setVisible(true);
@@ -206,6 +212,7 @@ export default class DialogueManager {
         this.currentAudio.once('complete', () => {
             timer.remove(false);
             this.hideDialogue();
+            if (completeCallback) completeCallback();
         });
     }
 

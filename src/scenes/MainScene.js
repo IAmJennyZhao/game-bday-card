@@ -17,7 +17,6 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('rintsukiAvatar', rintsukiAvatar);
     }
 
-
     create() {
         // Resize background image to fit
         const cameraWidth = this.cameras.main.width;
@@ -89,8 +88,8 @@ export default class MainScene extends Phaser.Scene {
         // Interaction states
         this.InteractionStates = {
             None: 'None', 
-            InDialogue: 'InDialogue', 
-            InCutscene: 'InCutscene'
+            InDialogue: 'InDialogue', // listening to video or audio message
+            InCutscene: 'InCutscene' // TYPE: change to this to a different type of dialogue 
         };
         this.interactionState = this.InteractionStates.None;
 
@@ -134,7 +133,8 @@ export default class MainScene extends Phaser.Scene {
             this.interactText.setText(`[E] Interact with ${nearZone.id}`);
             if (Phaser.Input.Keyboard.JustDown(this.eKey)) this.handleInteraction(nearZone.id);
         } else if (this.interactionState === this.InteractionStates.InDialogue) {
-            this.interactText.setText(`[Space] Continue Dialogue`);
+            // this.interactText.setText(`[Space] Continue Dialogue`); // TODO: set up guide tutorial dialogue maybe if i have time :3
+            this.interactText.setText('');
         } else {
             this.interactText.setText('');
         }
@@ -188,6 +188,7 @@ export default class MainScene extends Phaser.Scene {
 
 
     playDialogue(id) {
+        this.interactionState = this.InteractionStates.InDialogue;
         // rintsukiVoiceDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles);
         let rintsukiVoiceDialogue = new DialogueManager(this, {
             avatarName: "Rintsuki",
@@ -222,13 +223,18 @@ export default class MainScene extends Phaser.Scene {
                 { 
                     text: "Listen to Voice Message (Space)", 
                     callback: () => {
-                        this.time.delayedCall(1000, rintsukiVoiceMessageDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles));
+                        this.time.delayedCall(1000, rintsukiVoiceMessageDialogue.playSubtitledAudio('rintsukiVoice', rintsukiSubtitles, () => {
+                            this.interactionState = this.InteractionStates.None;
+                        }));
                         this.markQuest(id);
                     }
                 },
                 { 
-                    text: "Leave", 
-                    callback: () => console.log("Player left dialogue.") 
+                    text: "Leave (Q)", 
+                    callback: () => {
+                        console.log("Player left dialogue.");
+                        this.interactionState = this.InteractionStates.None;
+                    }
                 }
                 ]
             }
