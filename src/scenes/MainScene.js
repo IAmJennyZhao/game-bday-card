@@ -54,7 +54,7 @@ export default class MainScene extends Phaser.Scene {
         })
 
         // Interaction text
-        this.interactText = this.add.text(20, 500, '', { font: '16px monospace', fill: '#fff' });
+        this.interactText = this.add.text(800, 900, '', { font: '32px monospace', fill: '#fff', backgroundColor: 'rgba(184, 151, 98, 0.52'}).setDepth(10);
 
         // Define interact zones (x, y, id)
         this.zones = [
@@ -78,8 +78,8 @@ export default class MainScene extends Phaser.Scene {
             { x: 1380, y: 250, id: 'river_friend_2' },
             { x: 500, y: 720, id: 'portal_friend' },
             { x: 170, y: 620, id: 'portal' },
-            { x: 380, y: 460, id: 'archery' },
-            { x: 870, y: 390, id: 'gacha_shrine' }
+            { x: 330, y: 380, id: 'archery' },
+            { x: 840, y: 390, id: 'gacha_shrine' }
         ];
 
         this.zoneSprites = this.zones.map(z => this.add.zone(z.x, z.y, 40, 40).setOrigin(0.5));
@@ -125,6 +125,9 @@ export default class MainScene extends Phaser.Scene {
         for (let i = 0; i < this.zones.length; i++) {
             const z = this.zones[i];
             const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, z.x, z.y);
+            if (z.id==='archery' || z.id==='gacha_shrine') {
+                if (dist < 100) nearZone = z;
+            } 
             if (dist < 40) nearZone = z;
         }
         if (nearZone!=null && (this.interactionState === this.InteractionStates.None)) {
