@@ -41,6 +41,7 @@ import macsVoice from './video/messages/macs.mp3';
 import levenskiVoice from './video/messages/levenski.mp3';
 import howlVoice from './video/messages/howl.mp3'; // TODO howl's vid
 import aniphaVoice from './video/messages/anipha.mp3';
+import jorziVoice from './video/messages/jorzi.mp3';
 import thighsVoice from './video/messages/thighs.mp3';
 import santruVoice from './video/messages/santru.wav';
 
@@ -52,8 +53,8 @@ import macsAvatar from './npc_avatars/macs.png';
 import levenskiAvatar from './npc_avatars/levenski.png';
 import howlAvatar from './npc_avatars/howl.png'; // TODO: see if you can make howl's avatar a gif
 import aniphaAvatar from './npc_avatars/anipha.png';
-// import thighsAvatar from './npc_avatars/thighs.png';
-// TODO: add in thigh's avatar
+import jorziAvatar from './npc_avatars/jorzi.png';
+import thighsAvatar from './npc_avatars/thighs.png'; // TODO: change thighs avatar to a better one
 import santruAvatar from './npc_avatars/santru.png';
 import scarfyAvatar from './npc_avatars/scarfy.png';
 import melAvatar from './npc_avatars/mel.png';
@@ -65,6 +66,6 @@ export { bg, player,
     fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarCola, fiveStarValorant,
     valorantBG, gun, explosion,
     dialogueBox, 
-    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, thighsVoice, santruVoice, 
-    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, /*thighsAvatar,*/ santruAvatar, scarfyAvatar, melAvatar
+    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice, 
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
  };

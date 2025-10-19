@@ -11,6 +11,7 @@ export const quests = {
 };
 
 export function allComplete() {
+    // todo: check why the option for talking to all npcs isn't working :< 
     let talkedToAllNPCs = true;
     for (const npcTalkedTo in Object.values(quests.talkedToNPCs)) {
         talkedToAllNPCs = talkedToAllNPCs && npcTalkedTo;

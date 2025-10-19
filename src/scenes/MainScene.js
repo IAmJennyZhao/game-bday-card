@@ -1,8 +1,8 @@
 import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
 import DialogueManager, {dialogueData} from '../managers/DialogueManager.js';
 import { bg, player, dialogueBox,
-    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, thighsVoice, santruVoice,
-    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, /*thighsAvatar,*/ santruAvatar, scarfyAvatar, melAvatar
+    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice,
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
  } from '../assets';  
 
 export default class MainScene extends Phaser.Scene {
@@ -24,6 +24,7 @@ export default class MainScene extends Phaser.Scene {
         this.load.audio('levenskiVoice', levenskiVoice);
         this.load.audio('howlVoice', howlVoice); // TODO howl's vid
         this.load.audio('aniphaVoice', aniphaVoice);
+        this.load.audio('jorziVoice', jorziVoice);
         this.load.audio('thighsVoice', thighsVoice);
         this.load.audio('santruVoice', santruVoice);
 
@@ -35,8 +36,8 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('levenskiAvatar', levenskiAvatar);
         this.load.image('howlAvatar', howlAvatar);
         this.load.image('aniphaAvatar', aniphaAvatar);
-        // TODO: get thighs's avatar
-        // this.load.image('thighsAvatar', thighsAvatar);
+        this.load.image('jorziAvatar', jorziAvatar);
+        this.load.image('thighsAvatar', thighsAvatar);
         this.load.image('santruAvatar', santruAvatar);
         this.load.image('scarfyAvatar', scarfyAvatar);
         this.load.image('melAvatar', melAvatar);
