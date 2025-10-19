@@ -80,7 +80,7 @@ export default class DialogueManager {
         this.interactText.setVisible(false);
     }
 
-    async startDialogue(dialogues = []) {
+    async startDialogue(dialogues = [], onComplete = null) {
         if (!this.dialogueBox) this.createUI();
 
         this.dialogueBox.setVisible(true);
@@ -92,6 +92,7 @@ export default class DialogueManager {
         for (const line of dialogues) {
             await this.showLine(line);
         }
+        if (onComplete) onComplete();
 
         this.hideDialogue();
     }

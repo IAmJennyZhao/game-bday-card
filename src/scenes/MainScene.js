@@ -62,7 +62,7 @@ export default class MainScene extends Phaser.Scene {
         backgroundImage.y = ((cameraHeight - backgroundImage.displayHeight) / 2);
 
         // Player setup
-        this.player = this.physics.add.sprite(950, 900, 'player');
+        this.player = this.physics.add.sprite(950, 900, 'player').setDepth(7);
         this.player.setScale(0.5, 0.5);
         this.player.setCollideWorldBounds(true);
 
@@ -92,25 +92,27 @@ export default class MainScene extends Phaser.Scene {
             { x: 993, y: 440, id: 'Scarfy' },
             { x: 570, y: 450, id: 'Mel' },
 
-            // { x: 300, y: 880, id: 'grass_friend_1' },
-            // { x: 1070, y: 820, id: 'torii_gate_friend' },
-            // { x: 1790, y: 870, id: 'grass_friend_2' },
-            // { x: 1380, y: 700, id: 'picnic_friend_1' },
-            // { x: 1500, y: 700, id: 'picnic_friend_2' },
-            // { x: 1360, y: 540, id: 'picnic_friend_3' },
-            // { x: 1430, y: 540, id: 'picnic_friend_4' },
-            // { x: 1630, y: 240, id: 'bridge_friend_1' },
-            // { x: 1780, y: 240, id: 'bridge_friend_2' },
-            // { x: 993, y: 440, id: 'shrine_friend' },
-            // { x: 570, y: 450, id: 'archery_friend_1' },
-            { x: 510, y: 470, id: 'archery_friend_2' },
-            { x: 1290, y: 210, id: 'river_friend_1' },
-            { x: 1380, y: 250, id: 'river_friend_2' },
-            { x: 500, y: 720, id: 'portal_friend' },
             { x: 170, y: 620, id: 'portal' },
             { x: 330, y: 380, id: 'archery' },
             { x: 840, y: 390, id: 'gacha_shrine' }
         ];
+
+        // add in npc images
+        let maxHeight = 200;
+        let maxWidth = 150;
+
+        // loop through zones and add npc images
+        this.zones.forEach(z => {
+            if (z.id === 'archery' || z.id === 'gacha_shrine' || z.id === 'portal') {
+                return;
+            }
+            // scale npc images to fit in box
+            let npcImage = this.add.image(z.x, z.y, dialogueData[z.id].avatarKey).setDepth(5);
+            let scaleX = maxWidth / npcImage.displayWidth;
+            let scaleY = maxHeight / npcImage.displayHeight;
+            let scale = Math.min(scaleX, scaleY);
+            npcImage.setScale(scale);
+        });
 
         this.zoneSprites = this.zones.map(z => this.add.zone(z.x, z.y, 40, 40).setOrigin(0.5));
 
@@ -219,6 +221,11 @@ export default class MainScene extends Phaser.Scene {
 
 
     playDialogue(id) {
+        if (!(id in dialogueData)) {
+            console.warn(`No dialogue data found for id: ${id}`);
+            return;
+        }
+
         // Initalize dialogue managers with npc data
         this.interactionState = this.InteractionStates.InDialogue;
         let npcVoiceDialogue = new DialogueManager(this, {
@@ -248,9 +255,9 @@ export default class MainScene extends Phaser.Scene {
                     text: "Listen to Voice Message (Space)", 
                     callback: () => {
                         if (!dialogueData[id].avatarVoiceMessage) {
-                            npcVoiceMessageDialogue.startDialogue(dialogueData[id].subtitles);
-                            console.log("asddkjf;asjd;foi jfathis part finished we are now in a none interaction state");
-                            this.interactionState = this.InteractionStates.None;
+                            npcVoiceMessageDialogue.startDialogue(dialogueData[id].subtitles, () => {
+                                this.interactionState = this.InteractionStates.None;
+                            });
                             return;
                         }
                         this.time.delayedCall(1000, npcVoiceMessageDialogue.playSubtitledAudio(dialogueData[id].avatarVoiceMessage, dialogueData[id].subtitles, () => {
