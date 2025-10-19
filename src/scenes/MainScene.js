@@ -1,8 +1,8 @@
 import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
 import DialogueManager, {dialogueData} from '../managers/DialogueManager.js';
 import { bg, player, dialogueBox,
-    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice,
-    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
+    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, luoVoice, risuVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice, scarfyVoice, melVoice,
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, luoAvatar, risuAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
  } from '../assets';  
 
 export default class MainScene extends Phaser.Scene {
@@ -22,11 +22,15 @@ export default class MainScene extends Phaser.Scene {
         this.load.audio('rintsukiVoice', rintsukiVoice);
         this.load.audio('macsVoice', macsVoice);
         this.load.audio('levenskiVoice', levenskiVoice);
+        this.load.audio('luoVoice', luoVoice);
+        this.load.audio('risuVoice', risuVoice);
         this.load.audio('howlVoice', howlVoice); // TODO howl's vid
         this.load.audio('aniphaVoice', aniphaVoice);
         this.load.audio('jorziVoice', jorziVoice);
         this.load.audio('thighsVoice', thighsVoice);
         this.load.audio('santruVoice', santruVoice);
+        this.load.audio('scarfyVoice', scarfyVoice);
+        this.load.audio('melVoice', melVoice);
 
         // load all npc avatars
         this.load.image('bumblebeeAvatar', bumblebeeAvatar);
@@ -34,6 +38,8 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('rintsukiAvatar', rintsukiAvatar);
         this.load.image('macsAvatar', macsAvatar);
         this.load.image('levenskiAvatar', levenskiAvatar);
+        this.load.image('luoAvatar', luoAvatar);
+        this.load.image('risuAvatar', risuAvatar);
         this.load.image('howlAvatar', howlAvatar);
         this.load.image('aniphaAvatar', aniphaAvatar);
         this.load.image('jorziAvatar', jorziAvatar);
@@ -85,8 +91,11 @@ export default class MainScene extends Phaser.Scene {
             { x: 1790, y: 870, id: 'Rintsuki' },
             { x: 1380, y: 700, id: 'Macs' },
             { x: 1500, y: 700, id: 'Levenski' },
+            { x: 1100, y: 700, id: 'Luo' },
+            { x: 900, y: 700, id: 'Risu' },
             { x: 1360, y: 540, id: 'Howl' },
             { x: 1430, y: 540, id: 'Anipha' },
+            { x: 330, y: 240, id: 'Jorzi' },
             { x: 1630, y: 240, id: 'Thighs' },
             { x: 1780, y: 240, id: 'Santru' },
             { x: 993, y: 440, id: 'Scarfy' },
@@ -125,14 +134,6 @@ export default class MainScene extends Phaser.Scene {
             InCutscene: 'InCutscene' // TYPE: change to this to a different type of dialogue 
         };
         this.interactionState = this.InteractionStates.None;
-
-        // // Dialogue Managers
-        // rintsukiVoiceDialogue = new DialogueManager(this, {
-        //     avatarKey: 'rintsukiAvatar',
-        //     dialogueBoxKey: 'dialogueBox',
-        //     fontFamily: 'PixelFont',
-        //     bilingual: true
-        // });
     }
 
     update() {
@@ -182,7 +183,7 @@ export default class MainScene extends Phaser.Scene {
                 // TODO: Update with Risu's avatars
                 let risuDialogue = new DialogueManager(this, {
                     avatarName: "Risu",
-                    avatarKey: 'rintsukiAvatar',
+                    avatarKey: 'risuAvatar',
                     dialogueBoxKey: 'dialogueBox',
                     fontFamily: 'PixelFont',
                     bilingual: true
@@ -191,7 +192,6 @@ export default class MainScene extends Phaser.Scene {
                     {
                         english: messageDict[0],
                         japanese: messageDict[1],
-                        // voiceKey: 'rintsuki',
                     }
                 ]);
             }

@@ -38,11 +38,15 @@ import bumblebeeVoice from './video/messages/bumblebee.mp3';
 import rintsukiVoice from './video/messages/rintsuki.wav';
 import macsVoice from './video/messages/macs.mp3';
 import levenskiVoice from './video/messages/levenski.mp3';
+import luoVoice from './video/messages/luo.mp3';
+import risuVoice from './video/messages/risu.mp3';
 import howlVoice from './video/messages/howl.mp3'; // TODO howl's vid
 import aniphaVoice from './video/messages/anipha.mp3';
 import jorziVoice from './video/messages/jorzi.mp3';
 import thighsVoice from './video/messages/thighs.mp3';
 import santruVoice from './video/messages/santru.wav';
+import scarfyVoice from './video/messages/scarfy.mp3';
+import melVoice from './video/messages/mel.mp3';
 
 // avatar assets
 import bumblebeeAvatar from './npc_avatars/bumblebee.png';
@@ -50,6 +54,8 @@ import chrisAvatar from './npc_avatars/chris_cropped.png';
 import rintsukiAvatar from './npc_avatars/rintsuki.png';
 import macsAvatar from './npc_avatars/macs.png';
 import levenskiAvatar from './npc_avatars/levenski.png';
+import luoAvatar from './npc_avatars/luo.png';
+import risuAvatar from './npc_avatars/risu.png';
 import howlAvatar from './npc_avatars/howl.png'; // TODO: see if you can make howl's avatar a gif
 import aniphaAvatar from './npc_avatars/anipha.png';
 import jorziAvatar from './npc_avatars/jorzi.png';
@@ -65,6 +71,6 @@ export { bg, player,
     fiveStarCamellya, fiveStarJapaneseSoufflePancakes, fiveStarRisu, fiveStarCola, fiveStarValorant,
     valorantBG, gun, explosion,
     dialogueBox, 
-    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice, 
-    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
+    bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, luoVoice, risuVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice, scarfyVoice, melVoice,
+    bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, luoAvatar, risuAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
  };
