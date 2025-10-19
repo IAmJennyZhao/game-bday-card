@@ -1,5 +1,6 @@
 import bg from './images/background.png';
 import player from './player.png';
+import backgroundMusic from './music/Lingering Daylight.mp3';
 
 // gacha videos
 import fourStarGenshinVideo from './video/gachas/4star_genshin.mp4';
@@ -64,7 +65,7 @@ import santruAvatar from './npc_avatars/santru.png';
 import scarfyAvatar from './npc_avatars/scarfy.png';
 import melAvatar from './npc_avatars/mel.png';
 
-export { bg, player, 
+export { bg, player, backgroundMusic,
     fourStarGenshinVideo, fourStarWuwaVideo, fourStarHSRVideo, fiveStarGenshinVideo, fiveStarWuwaVideo, fiveStarHSRVideo,
     fourStarDrPepper, fourStarDumplings, fourStarJinhsi, fourStarKansaiBen, fourStarNekotaTsuna,
     fourStarOverwatch, fourStarReaverVandal, fourStarRushia, fourStarVrcgun, fourStarWuwa, 

@@ -1,6 +1,6 @@
 import { quests, allComplete, getMissingMessage } from '../managers/QuestManager.js';
 import DialogueManager, {dialogueData} from '../managers/DialogueManager.js';
-import { bg, player, dialogueBox,
+import { bg, player, backgroundMusic, dialogueBox,
     bumblebeeVoice, rintsukiVoice, macsVoice, levenskiVoice, luoVoice, risuVoice, howlVoice, aniphaVoice, jorziVoice, thighsVoice, santruVoice, scarfyVoice, melVoice,
     bumblebeeAvatar, chrisAvatar, rintsukiAvatar, macsAvatar, levenskiAvatar, luoAvatar, risuAvatar, howlAvatar, aniphaAvatar, jorziAvatar, thighsAvatar, santruAvatar, scarfyAvatar, melAvatar
  } from '../assets';  
@@ -14,6 +14,7 @@ export default class MainScene extends Phaser.Scene {
         // load background image and sprite
         this.load.image('bg', bg);
         this.load.spritesheet('player', player, { frameWidth: 78, frameHeight: 210 });
+        this.load.audio('backgroundMusic', backgroundMusic);
         
         this.load.image('dialogueBox', dialogueBox);
 
@@ -71,6 +72,13 @@ export default class MainScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(950, 900, 'player').setDepth(7);
         this.player.setScale(0.5, 0.5);
         this.player.setCollideWorldBounds(true);
+
+        // Play background music
+        this.bgm = this.sound.add('backgroundMusic', {
+            loop: true,      // keep looping
+            volume: 0.05,     // adjust volume
+        });
+        this.bgm.play();
 
         // Add arrow and wasd movement listeners
         this.cursors = this.input.keyboard.createCursorKeys();
