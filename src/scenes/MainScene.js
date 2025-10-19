@@ -104,10 +104,10 @@ export default class MainScene extends Phaser.Scene {
             { x: 1100, y: 160, id: 'Levenski' },
             { x: 1230, y: 230, id: 'Luo' },
 
-            { x: 1800, y: 330, id: 'Bumblebee' },
-            { x: 1870, y: 430, id: 'Thighs' },
+            { x: 1690, y: 330, id: 'Bumblebee' },
+            { x: 1500, y: 313, id: 'Thighs' },
 
-            { x: 1750, y: 870, id: 'Chris' },
+            { x: 756, y: 546, id: 'Chris' },
 
             { x: 1360, y: 530, id: 'Rintsuki' },
             { x: 1500, y: 530, id: 'Macs' },
@@ -117,9 +117,9 @@ export default class MainScene extends Phaser.Scene {
             { x: 600, y: 700, id: 'Scarfy' },
             { x: 450, y: 700, id: 'Mel' },
 
-            { x: 170, y: 620, id: 'portal' },
-            { x: 330, y: 380, id: 'archery' },
-            { x: 840, y: 390, id: 'gacha_shrine' }
+            { x: 180, y: 540, id: 'portal' },
+            { x: 500, y: 330, id: 'archery' },
+            { x: 1043, y: 326, id: 'gacha_shrine' }
         ];
 
         // add in npc images
@@ -156,7 +156,7 @@ export default class MainScene extends Phaser.Scene {
     }
 
     update() {
-        // console.log(this.player.x, this.player.y);
+        console.log(this.player.x, this.player.y);
         // Movement using arrow or wasd keys when interaction state is None
         this.player.setVelocity(0);
         if (this.interactionState === this.InteractionStates.None) {
