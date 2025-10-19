@@ -148,7 +148,7 @@ export default class MainScene extends Phaser.Scene {
     }
 
     update() {
-        console.log(this.player.x, this.player.y);
+        // console.log(this.player.x, this.player.y);
         // Movement using arrow or wasd keys when interaction state is None
         this.player.setVelocity(0);
         if (this.interactionState === this.InteractionStates.None) {
@@ -275,7 +275,6 @@ export default class MainScene extends Phaser.Scene {
                         this.time.delayedCall(1000, npcVoiceMessageDialogue.playSubtitledAudio(dialogueData[id].avatarVoiceMessage, dialogueData[id].subtitles, () => {
                             this.interactionState = this.InteractionStates.None;
                         }));
-                        this.markQuest(id);
                     }
                 },
                 { 
@@ -287,6 +286,7 @@ export default class MainScene extends Phaser.Scene {
                 ]
             }
         ]);
+        this.markQuest(id);
     }
 
     markQuest(id) {
