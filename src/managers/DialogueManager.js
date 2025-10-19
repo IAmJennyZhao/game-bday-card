@@ -7,6 +7,7 @@ export default class DialogueManager {
         this.textJapanese = null;
         this.choiceButtons = [];
         this.keyListener = null;
+        this.interactText = null;
 
         this.fontFamily = config.fontFamily || 'PixelFont';
         this.bilingual = config.bilingual ?? false;
@@ -69,12 +70,14 @@ export default class DialogueManager {
                 wordWrap: { width: (width - 1000) / 2 - 10 }
             }).setDepth(102).setScrollFactor(0);
         }
-
+        this.interactText = this.scene.add.text(800, 970, 'Press Space to Continue', { font: '32px monospace', fill: '#fff', backgroundColor: 'rgba(184, 151, 98, 0.52'}).setDepth(106);
+        
         this.dialogueBox.setVisible(false);
         if (this.avatar) this.avatar.setVisible(false);
         this.textName.setVisible(false);
         this.textEnglish.setVisible(false);
         if (this.textJapanese) this.textJapanese.setVisible(false);
+        this.interactText.setVisible(false);
     }
 
     async startDialogue(dialogues = []) {
@@ -99,6 +102,7 @@ export default class DialogueManager {
 
             this.textEnglish.setText('');
             if (this.textJapanese) this.textJapanese.setText('');
+            this.interactText.setVisible(false);
 
             // Play voice if exists
             if (voiceKey) {
@@ -133,9 +137,11 @@ export default class DialogueManager {
         this.keyListener = null;
         this.choiceButtons.forEach(btn => btn.destroy());
         this.choiceButtons = [];
+        this.interactText.setVisible(false);
 
         if (!choices) {
             // No choices: wait for space again to continue
+            this.interactText.setVisible(true);
             this.scene.input.keyboard.once('keydown-SPACE', () => resolve());
             return;
         }
@@ -157,6 +163,7 @@ export default class DialogueManager {
                     this.keyListener = null;
                     this.choiceButtons.forEach(b => b.destroy());
                     this.choiceButtons = [];
+                    this.interactText.setVisible(false);
                     resolve();
                 });
             this.choiceButtons.push(btn);
@@ -222,6 +229,7 @@ export default class DialogueManager {
         if (this.textName) this.textName.setVisible(false);
         if (this.textEnglish) this.textEnglish.setVisible(false);
         if (this.textJapanese) this.textJapanese.setVisible(false);
+        if (this.interactText) this.interactText.setVisible(false);
         this.choiceButtons.forEach(btn => btn.destroy());
         this.choiceButtons = [];
     }
@@ -409,11 +417,11 @@ export const dialogueData = {
             voiceKey: null
         },
         subtitles: [
-            { time: 0.0, english: "誕生日おめでとう, Dylan. I'm proud of you to reach the point of where you are now.", japanese: "誕生日おめでとう、Dylan！今の君を本当に誇りに思ってるよ。" },
-            { time: 2.7, english: "Even if things have been hard, I'm glad you've kept going.", japanese: "辛いことがあっても、諦めずに前に進んでくれて嬉しい。" },
-            { time: 4.2, english: "Thank you for being there for me ever since I wanted to do this crazy ass dream to do this Japanese shit.", japanese: "俺がこの“クレイジーな日本語の夢”を追い始めた時から、ずっと支えてくれてありがとう。" },
-            { time: 7.4, english: "You've been a big influence on me, and everyone around you.", japanese: "君は俺にも、周りのみんなにもすごく大きな影響を与えてきた。" },
-            { time: 11.2, english: "Your potential is limitless; happy birthday, brother.", japanese: "君の可能性は無限大だ。お誕生日おめでとう！" },
+            { english: "誕生日おめでとう, Dylan. I'm proud of you to reach the point of where you are now.", japanese: "誕生日おめでとう、Dylan！今の君を本当に誇りに思ってるよ。" },
+            { english: "Even if things have been hard, I'm glad you've kept going.", japanese: "辛いことがあっても、諦めずに前に進んでくれて嬉しい。" },
+            { english: "Thank you for being there for me ever since I wanted to do this crazy ass dream to do this Japanese shit.", japanese: "俺がこの“クレイジーな日本語の夢”を追い始めた時から、ずっと支えてくれてありがとう。" },
+            { english: "You've been a big influence on me, and everyone around you.", japanese: "君は俺にも、周りのみんなにもすごく大きな影響を与えてきた。" },
+            { english: "Your potential is limitless; happy birthday, brother.", japanese: "君の可能性は無限大だ。お誕生日おめでとう！" },
         ]
     },
     'Scarfy': {
@@ -426,8 +434,8 @@ export const dialogueData = {
             voiceKey: null
         },
         subtitles: [
-            { time: 0.0, english: "Happy Birthday Void!!! We all love you.", japanese: "void誕生日おめでとう！！！みんな君のことが大好きだよ。" },
-            { time: 5.0, english: "Good luck in Oregon. We’re always here for you.", japanese: "オレゴン州でも頑張って！俺たちはいつでも応援してるからね" }
+            { english: "Happy Birthday Void!!! We all love you.", japanese: "void誕生日おめでとう！！！みんな君のことが大好きだよ。" },
+            { english: "Good luck in Oregon. We’re always here for you.", japanese: "オレゴン州でも頑張って！俺たちはいつでも応援してるからね" }
         ]
     },
     'Mel': {
@@ -440,8 +448,8 @@ export const dialogueData = {
             voiceKey: null
         },
         subtitles: [
-            { time: 0.0, english: "Hi void youre at my age now congrats ur still a kid", japanese: "やあvoid、ついにお前も俺と同い年か！おめでとう！でもまだガキだな（笑）" },
-            { time: 5.0, english: "youre still 17 have a good day happy birthday 🎉🎉🎉", japanese: "楽しい一日を！誕生日おめでとう 🎉🎉🎉" },
+            { english: "Hi void youre at my age now congrats ur still a kid", japanese: "やあvoid、ついにお前も俺と同い年か！おめでとう！でもまだガキだな（笑）" },
+            { english: "youre still 17 have a good day happy birthday 🎉🎉🎉", japanese: "楽しい一日を！誕生日おめでとう 🎉🎉🎉" },
         ]
     },
 

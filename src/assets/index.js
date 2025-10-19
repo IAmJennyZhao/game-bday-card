@@ -31,7 +31,6 @@ import valorantBG from './images/valorant_range_bg.png';
 import gun from './images/prime_vandal.png';
 import explosion from './images/explosion_fx.png';
 
-console.log("waht the mf isaoiwjef oiaw but wahiiiiii");
 // voice message assets
 import dialogueBox from './ui/dialogue_box.png';
 

@@ -219,8 +219,7 @@ export default class MainScene extends Phaser.Scene {
 
 
     playDialogue(id) {
-        // id = 'Rintsuki'; // TEMPORARY: force rintsuki for testing
-
+        // Initalize dialogue managers with npc data
         this.interactionState = this.InteractionStates.InDialogue;
         let npcVoiceDialogue = new DialogueManager(this, {
             avatarName: dialogueData[id].avatarName,
@@ -238,6 +237,7 @@ export default class MainScene extends Phaser.Scene {
             bilingual: true
         });
 
+        // Start initial dialogue
         npcVoiceDialogue.startDialogue([
             {
                 english: dialogueData[id].initialDialogue.english,
@@ -247,6 +247,12 @@ export default class MainScene extends Phaser.Scene {
                 { 
                     text: "Listen to Voice Message (Space)", 
                     callback: () => {
+                        if (!dialogueData[id].avatarVoiceMessage) {
+                            npcVoiceMessageDialogue.startDialogue(dialogueData[id].subtitles);
+                            console.log("asddkjf;asjd;foi jfathis part finished we are now in a none interaction state");
+                            this.interactionState = this.InteractionStates.None;
+                            return;
+                        }
                         this.time.delayedCall(1000, npcVoiceMessageDialogue.playSubtitledAudio(dialogueData[id].avatarVoiceMessage, dialogueData[id].subtitles, () => {
                             this.interactionState = this.InteractionStates.None;
                         }));
