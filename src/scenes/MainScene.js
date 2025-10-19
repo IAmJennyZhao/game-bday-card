@@ -81,25 +81,33 @@ export default class MainScene extends Phaser.Scene {
             right: Phaser.Input.Keyboard.KeyCodes.D
         })
 
+        // Rules text
+        this.interactText = this.add.text(50, 100, 'Use WASD or Arrow keys to move', { font: '60px monospace', fill: '#fff', backgroundColor: 'rgba(184, 151, 98, 0.52'}).setDepth(10);
         // Interaction text
         this.interactText = this.add.text(800, 900, '', { font: '32px monospace', fill: '#fff', backgroundColor: 'rgba(184, 151, 98, 0.52'}).setDepth(10);
 
         // Define interact zones (x, y, id)
         this.zones = [
-            { x: 300, y: 880, id: 'Bumblebee' },
-            { x: 1070, y: 820, id: 'Chris' },
-            { x: 1790, y: 870, id: 'Rintsuki' },
-            { x: 1380, y: 700, id: 'Macs' },
-            { x: 1500, y: 700, id: 'Levenski' },
-            { x: 1100, y: 700, id: 'Luo' },
-            { x: 900, y: 700, id: 'Risu' },
-            { x: 1360, y: 540, id: 'Howl' },
-            { x: 1430, y: 540, id: 'Anipha' },
-            { x: 330, y: 240, id: 'Jorzi' },
-            { x: 1630, y: 240, id: 'Thighs' },
-            { x: 1780, y: 240, id: 'Santru' },
-            { x: 993, y: 440, id: 'Scarfy' },
-            { x: 570, y: 450, id: 'Mel' },
+            { x: 1030, y: 820, id: 'Risu' },
+
+            { x: 1030, y: 600, id: 'Anipha' },
+            { x: 1130, y: 600, id: 'Howl' },
+
+            { x: 1100, y: 160, id: 'Levenski' },
+            { x: 1230, y: 230, id: 'Luo' },
+
+            { x: 1800, y: 330, id: 'Bumblebee' },
+            { x: 1870, y: 430, id: 'Thighs' },
+
+            { x: 1750, y: 870, id: 'Chris' },
+
+            { x: 1360, y: 530, id: 'Rintsuki' },
+            { x: 1500, y: 530, id: 'Macs' },
+            { x: 1600, y: 700, id: 'Jorzi' },
+            { x: 1400, y: 700, id: 'Santru' },
+
+            { x: 600, y: 700, id: 'Scarfy' },
+            { x: 450, y: 700, id: 'Mel' },
 
             { x: 170, y: 620, id: 'portal' },
             { x: 330, y: 380, id: 'archery' },
@@ -121,6 +129,9 @@ export default class MainScene extends Phaser.Scene {
             let scaleY = maxHeight / npcImage.displayHeight;
             let scale = Math.min(scaleX, scaleY);
             npcImage.setScale(scale);
+
+            // make lev tiny
+            if (z.id === 'Levenski') npcImage.setScale(scale/4);
         });
 
         this.zoneSprites = this.zones.map(z => this.add.zone(z.x, z.y, 40, 40).setOrigin(0.5));
@@ -137,6 +148,7 @@ export default class MainScene extends Phaser.Scene {
     }
 
     update() {
+        console.log(this.player.x, this.player.y);
         // Movement using arrow or wasd keys when interaction state is None
         this.player.setVelocity(0);
         if (this.interactionState === this.InteractionStates.None) {
